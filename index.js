@@ -8,6 +8,9 @@ express()
   //.set('views', path.join(__dirname, 'views'))
   //.set('view engine', 'ejs')
   .get('/', function (req, res) {
-	res.set('Content-Type', 'text/plain')
+		// allow XHR calls (CORS)
+	res.append('Access-Control-Allow-Origin', ['*']);
+	res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	res.append('Access-Control-Allow-Headers', 'Content-Type');
   	res.send('Hello World 3!\n')
   })
