@@ -9,8 +9,8 @@ express()
   .get('/', (req, res, next) => {
 		// allow XHR calls (CORS)
 	res.append('Access-Control-Allow-Origin', ['*']);
-	res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	res.append('Access-Control-Allow-Methods', 'GET');
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
-  	res.send('Hello World 3!\n');
+  	res.send('Hello World 4!\n');
   })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  .listen(PORT, () /*=> console.log(`Listening on ${ PORT }`)*/)
