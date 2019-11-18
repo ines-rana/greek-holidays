@@ -18,7 +18,7 @@
     "request": "^2.81.0",
     "tape": "^4.7.0",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.25-2019a"
+    "moment-timezone": "^0.5.27"
   },
   "repository": {
     "type": "git",
