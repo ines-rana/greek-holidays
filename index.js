@@ -13,4 +13,4 @@ express()
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
   	res.send('Hello World 4!\n');
   })
-  .listen(PORT, () /*=> console.log(`Listening on ${ PORT }`)*/)
+  .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
