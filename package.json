@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "name": "greek holidays",
+  "version": "0.1",
+  "description": "official greek holidays in vCalendar format (dynamic)",
   "engines": {
     "node": "12.x"
   },
@@ -12,20 +12,22 @@
   },
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
   },
   "devDependencies": {
     "request": "^2.81.0",
-    "tape": "^4.7.0"
+    "tape": "^4.7.0",
+    "moment": "^2.24.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/ines-rana/greek-holidays"
   },
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "greek holidays"
   ],
   "license": "MIT"
 }
