@@ -7,10 +7,10 @@ express()
   //.use(express.static(path.join(__dirname, 'public')))
   //.set('views', path.join(__dirname, 'views'))
   //.set('view engine', 'ejs')
-  .get('/', function (req, res) {
+  .get('/', (req, res, next) => {
 		// allow XHR calls (CORS)
 	res.append('Access-Control-Allow-Origin', ['*']);
 	res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
-  	res.send('Hello World 3!\n')
+  	res.send('Hello World 3!\n');
   })
