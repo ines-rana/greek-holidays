@@ -12,6 +12,19 @@ const moment = require('moment-timezone');	// date manipulation library
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
+const vcal_header='
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Office Holidays Ltd.//EN
+X-WR-CALNAME:Ελληνικές αργίες
+X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα
+REFRESH-INTERVAL;VALUE=DURATION:PT48H
+X-PUBLISHED-TTL:PT48H
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+'
+
 express()
   //.use(express.static(path.join(__dirname, 'public')))
   //.set('views', path.join(__dirname, 'views'))
@@ -39,6 +52,8 @@ express()
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format() + '\n'
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format('DD/MM/YYYY kk:mm:ss') + '\n'
 		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY kk:mm:ss') + '\n'
+
+		+ vcal_header + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
