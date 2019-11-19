@@ -13,11 +13,11 @@ express()
 	res.append('Access-Control-Allow-Methods', 'GET');
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
 
-	const now = moment();now.tz('Europe/Athens');
+	var now = moment();
   	res.send('Hello World 5!\n' +
-		now.format('') + '\n' +
-		now.format('MMMM MM/DD/YYYY hh:mm:ss a') + '\n' +
-		now.format('YYYY') + '\n'
+		now.tz('Europe/Athens').format('') + '\n' +
+		now.tz('Europe/Athens').format('MMMM MM/DD/YYYY hh:mm:ss a') + '\n' +
+		now.tz('Europe/Athens').format('YYYY') + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
