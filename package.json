@@ -1,5 +1,5 @@
 {
-  "name": "greek holidays",
+  "name": "greek-holidays",
   "version": "0.1",
   "description": "official greek holidays in vCalendar format (dynamic)",
   "engines": {
