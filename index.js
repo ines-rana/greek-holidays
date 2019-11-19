@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 5000
 const moment = require('moment-timezone');	// date manipulation library
       // moment.tz(..., String)     create a moment with a time zone
       // moment().tz(String)        convert the time zone of an existing moment
+      // DD/MM/YYYY  D/M/Y          format date with/without zero-padding
+      // kk:mm:ss                   format time with zero-padding
 
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
@@ -26,17 +28,17 @@ express()
 
   	res.send(''
 		+ now.format('') + '\n' 
-		+ now.format('MMMM MM/DD/YYYY HH:mm:ss a') + '\n'
+		+ now.format('MMMM DD/MM/YYYY kk:mm:ss a') + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
 		+ req.query.to + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).format() + '\n'
-		+ moment.tz("2018-01-01 00:00:00",grTZ).format('MM/DD/YYYY HH:mm:ss') + '\n'
-		+ moment.tz("2018-01-01 00:00:00",grTZ).tz('UTC').format('MM/DD/YYYY HH:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).format('DD/MM/YYYY kk:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).tz('UTC').format('DD/MM/YYYY kk:mm:ss') + '\n'
 
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format() + '\n'
-		+ moment.tz("2018-01-01 23:59:59",grTZ).format('MM/DD/YYYY HH:mm:ss') + '\n'
-		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('MM/DD/YYYY HH:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).format('DD/MM/YYYY kk:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY kk:mm:ss') + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
