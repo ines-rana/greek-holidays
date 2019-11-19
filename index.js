@@ -1,8 +1,14 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+
+
 const moment = require('moment-timezone');	// date manipulation library
+      // moment.tz(..., String)     create a moment with a time zone
+      // moment().tz(String)        convert the time zone of an existing moment
+
 const grTZ = 'Europe/Athens';			// timezone in Greece
+
 
 express()
   //.use(express.static(path.join(__dirname, 'public')))
@@ -26,8 +32,11 @@ express()
 		+ req.query.to + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).format() + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).tz('UTC').format('MM/DD/YYYY hh:mm:ss') + '\n'
+
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format() + '\n'
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('MM/DD/YYYY hh:mm:ss') + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
