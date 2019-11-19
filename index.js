@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
-const moment = require('moment');		// date manipulation library
+const moment = require('moment-timezone');	// date manipulation library
 
 express()
   //.use(express.static(path.join(__dirname, 'public')))
