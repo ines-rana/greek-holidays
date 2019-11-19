@@ -1,3 +1,6 @@
+// produce a list of official greek holidays in iCalendar (RFC 5545) format
+
+
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
@@ -15,9 +18,9 @@ const grTZ = 'Europe/Athens';			// timezone in Greece
 const vcal_header = (function () {/*  
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Office Holidays Ltd.//EN
-X-WR-CALNAME:Ελληνικές αργίες
-X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα
+PRODID:-//https://greek-holidays.herokuapp.com///EL
+X-WR-CALNAME:Ξ•Ξ»Ξ»Ξ·Ξ½ΞΉΞΊΞ­Ο‚ Ξ±ΟΞ³Ξ―ΞµΟ‚
+X-WR-CALDESC:Ξ•Ο€Ξ―ΟƒΞ·ΞΌΞµΟ‚ Ξ±ΟΞ³Ξ―ΞµΟ‚ ΟƒΟ„Ξ·Ξ½ Ξ•Ξ»Ξ»Ξ¬Ξ΄Ξ±
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
 X-PUBLISHED-TTL:PT48H
 CALSCALE:GREGORIAN
