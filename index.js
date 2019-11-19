@@ -8,6 +8,7 @@ express()
   //.set('views', path.join(__dirname, 'views'))
   //.set('view engine', 'ejs')
   .get('/', (req, res, next) => {
+	res.append('Content-Type:', 'text/plain');
 		// allow XHR calls (CORS)
 	res.append('Access-Control-Allow-Origin', ['*']);
 	res.append('Access-Control-Allow-Methods', 'GET');
