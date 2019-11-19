@@ -26,17 +26,17 @@ express()
 
   	res.send(''
 		+ now.format('') + '\n' 
-		+ now.format('MMMM MM/DD/YYYY hh:mm:ss a') + '\n'
+		+ now.format('MMMM MM/DD/YYYY HH:mm:ss a') + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
 		+ req.query.to + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).format() + '\n'
-		+ moment.tz("2018-01-01 00:00:00",grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
-		+ moment.tz("2018-01-01 00:00:00",grTZ).tz('UTC').format('MM/DD/YYYY hh:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).format('MM/DD/YYYY HH:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).tz('UTC').format('MM/DD/YYYY HH:mm:ss') + '\n'
 
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format() + '\n'
-		+ moment.tz("2018-01-01 23:59:59",grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
-		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('MM/DD/YYYY hh:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).format('MM/DD/YYYY HH:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('MM/DD/YYYY HH:mm:ss') + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
