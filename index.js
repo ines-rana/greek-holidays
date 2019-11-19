@@ -16,7 +16,7 @@ const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
 
-/* RFC
+/* https://tools.ietf.org/html/rfc5545
 
 LOCATION;LANGUAGE=el:Ελλάς
        DTSTART;TZID=America/New_York:19980119T020000
@@ -41,6 +41,33 @@ RRULE:FREQ=YEARLY
        SUMMARY:Bastille Day Party
        END:VEVENT
        END:VCALENDAR
+
+
+
+
+BEGIN:VEVENT
+CLASS:PUBLIC
+UID:2019-01-01GR415regcountry@www.officeholidays.com
+CREATED:20191118T200338Z
+DESCRIPTION: New Year's Day is a public holiday in all countries that observe the Gregorian calendar, with the exception of Israel\n\n\n\nInformation provided by www.officeholidays.com
+URL:https://www.officeholidays.com/holidays/greece/international-new-years-day
+DTSTART;VALUE=DATE:20190101
+DTEND;VALUE=DATE:20190102
+DTSTAMP:20080101T000000Z
+LOCATION:Ελλάς
+PRIORITY:5
+SEQUENCE:0
+SUMMARY;LANGUAGE=en-us:New Year's Day
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MS-OLK-ALLOWEXTERNCHECK:TRUE
+X-MS-OLK-AUTOFILLLOCATION:FALSE
+X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
+X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE
+X-MS-OLK-CONFTYPE:0
+END:VEVENT
 */
 
 const vcal_header = (function () {/*  
