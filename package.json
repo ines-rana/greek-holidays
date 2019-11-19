@@ -1,6 +1,6 @@
 {
   "name": "greek-holidays",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "official greek holidays in vCalendar format (dynamic)",
   "engines": {
     "node": "12.x"
