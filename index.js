@@ -15,10 +15,39 @@ const moment = require('moment-timezone');	// date manipulation library
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
+
+/* RFC
+
+LOCATION;LANGUAGE=el:�����
+       DTSTART;TZID=America/New_York:19980119T020000
+       DTEND;TZID=America/New_York:19980119T030000
+
+DTSTART;TZID=America/New_York:19970105T083000
+RRULE:FREQ=YEARLY;INTERVAL=2;BYMONTH=1;BYDAY=SU;BYHOUR=8,9;
+ BYMINUTE=30
+"every Sunday in January at 8:30 AM and 9:30 AM, every other year"
+
+RRULE:FREQ=YEARLY
+
+
+       BEGIN:VCALENDAR
+       VERSION:2.0
+       PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+       BEGIN:VEVENT
+       UID:19970610T172345Z-AF23B2@example.com
+       DTSTAMP:19970610T172345Z
+       DTSTART:19970714T170000Z
+       DTEND:19970715T040000Z
+       SUMMARY:Bastille Day Party
+       END:VEVENT
+       END:VCALENDAR
+*/
+
 const vcal_header = (function () {/*  
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//https://greek-holidays.herokuapp.com///EL
+PRODID:https://greek-holidays.herokuapp.com/
+  Optional parameters: ?from=year1&to=year2
 X-WR-CALNAME:Ελληνικές αργίες
 X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
@@ -60,7 +89,7 @@ express()
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format('DD/MM/YYYY HH:mm:ss') + '\n'
 		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY HH:mm:ss') + '\n'
 
-		+ vcal_footer // + '\n'
+		+ vcal_footer + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
