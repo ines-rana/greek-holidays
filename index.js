@@ -13,7 +13,7 @@ express()
 	res.append('Access-Control-Allow-Methods', 'GET');
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
 
-	var now = moment.tz("", 'Europe/Athens');
+	var now = moment().tz('Europe/Athens');
   	res.send('Hello World 5!\n' +
 		now.format('') + '\n' +
 		now.format('MMMM MM/DD/YYYY hh:mm:ss a') + '\n' +
