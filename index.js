@@ -23,6 +23,8 @@ express()
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
 		+ req.query.to + '\n'
+		+ moment("2018-01-01T000000").tz('Europe/Athens').format() + '\n'
+		+ moment("2018-01-01T000000").tz('Europe/Athens').format('MM/DD/YYYY hh:mm:ss') + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
