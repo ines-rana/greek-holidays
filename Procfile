@@ -1,1 +1,1 @@
-web: node --debug index.js
+web: npm i moment-timezone; node --debug index.js
