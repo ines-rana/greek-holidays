@@ -24,10 +24,10 @@ express()
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
 		+ req.query.to + '\n'
-		+ moment("2018-01-01 00:00:00").tz(grTZ).format() + '\n'
-		+ moment("2018-01-01 00:00:00").tz(grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
-		+ moment("2018-01-01 23:59:59").tz(grTZ).format() + '\n'
-		+ moment("2018-01-01 23:59:59").tz(grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).format() + '\n'
+		+ moment.tz("2018-01-01 00:00:00",grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).format() + '\n'
+		+ moment.tz("2018-01-01 23:59:59",grTZ).format('MM/DD/YYYY hh:mm:ss') + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
