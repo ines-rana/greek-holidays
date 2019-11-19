@@ -28,7 +28,7 @@ METHOD:PUBLISH
 X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
-const vcal_footer = 'END:VCALENDAR';
+const vcal_footer = 'END:VCALENDAR';
 
 express()
   //.use(express.static(path.join(__dirname, 'public')))
