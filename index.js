@@ -27,6 +27,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+const vcal_footer = 'END:VCALENDAR'
 
 express()
   //.use(express.static(path.join(__dirname, 'public')))
@@ -43,6 +44,8 @@ express()
 	const thisYear=now.format('YYYY');
 
   	res.send(''
+		+ vcal_header + '\n'
+
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
 		+ thisYear + '\n'
@@ -56,7 +59,7 @@ express()
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format('DD/MM/YYYY HH:mm:ss') + '\n'
 		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY HH:mm:ss') + '\n'
 
-		+ vcal_header + '\n'
+		+ vcal_footer + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
