@@ -43,6 +43,7 @@ RRULE:FREQ=YEARLY
        END:VCALENDAR
 
 
+Sample calendar:
 
 
 BEGIN:VEVENT
@@ -54,10 +55,10 @@ URL:https://www.officeholidays.com/holidays/greece/international-new-years-day
 DTSTART;VALUE=DATE:20190101
 DTEND;VALUE=DATE:20190102
 DTSTAMP:20080101T000000Z
-LOCATION:Ελλάς
+LOCATION;LANGUAGE=el:Ξ•Ξ»Ξ»Ξ¬Ο‚
 PRIORITY:5
 SEQUENCE:0
-SUMMARY;LANGUAGE=en-us:New Year's Day
+SUMMARY;LANGUAGE=el:Ξ ΟΟ‰Ο„ΞΏΟ‡ΟΞΏΞ½ΞΉΞ¬
 TRANSP:OPAQUE
 X-MICROSOFT-CDO-BUSYSTATUS:BUSY
 X-MICROSOFT-CDO-IMPORTANCE:1
@@ -72,16 +73,18 @@ END:VEVENT
 
 
 
-// compute greek easter d/m/y
+// υπολογισμός ημέρας/μήνα του ελληνορθοδόξου Πάσχα για το έτος y
 function greek_easter(y){
-if (y<1583 || y>4099){return("year must be between 1583 and 4099");}
+// η Ελλάδα υιοθέτησε το γρηγοριανό ημερολόγιο το 1923,
+// η καθολική Ευρώπη το 1582
+if (y<1923 || y>4099){return("year must be between 1923 and 4099");}
 
 var e, y2, G, I, J, L, p, d, m;
 
 e=10
 if (y>1600) {
- y2=Math.floor(y/100)
- e=10+y2-16-Math.floor((y2-16)/4)
+  y2=Math.floor(y/100)
+  e=10+y2-16-Math.floor((y2-16)/4)
 }
 if (y<1583) { e=0 }
 
@@ -147,6 +150,8 @@ express()
 
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
++ 'DTSTAMP:19970610T172345Z' + '\n'
+		+ now.tz("UTC").format('YYYYMMDDTHHmmssZ') + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
 		+ req.query.to + '\n'
@@ -158,8 +163,30 @@ express()
 		+ moment.tz("2018-01-01 23:59:59",grTZ).format('DD/MM/YYYY HH:mm:ss') + '\n'
 		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY HH:mm:ss') + '\n'
 
+
 		+ vcal_footer + '\n'
 		+ JSON.stringify(greek_easter(req.query.from)) + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
+
+
+
+/*
+1/1 Πρωτοχρονιά
+6/1 Θεοφάνεια
+25/3 Εθνική εορτή
+1/5 Μετατίθεται σε άλλη εργάσιμη ημέρα,
+    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
+    ή με τη Δευτέρα του Πάσχα
+15/8 Κοίμηση της Θεοτόκου
+28/10 Εθνική εορτή 
+25/12 Χριστούγεννα
+26/12 Δεύτερη ημέρα Χριστουγέννων
+
+Πάσχα-48 	Καθαρά Δευτέρα
+Πάσχα-2		Μεγάλη Παρασκευή
+Πάσχα		Πάσχα
+Πάσχα+1  	Δευτέρα του Πάσχα
+Πάσχα+50	Αγίου Πνεύματος
+*/
