@@ -151,7 +151,7 @@ express()
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
 + 'DTSTAMP:19970610T172345Z' + '\n'
-		+ now.tz("UTC").format('YYYYMMDDTHHmmssZ') + '\n'
+		+ now.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z' + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
 		+ req.query.to + '\n'
