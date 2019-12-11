@@ -70,6 +70,47 @@ X-MS-OLK-CONFTYPE:0
 END:VEVENT
 */
 
+
+
+// compute greek easter d/m/y
+function greek_easter(y){
+if (y<1583 || y>4099){return("year must be between 1583 and 4099");}
+
+var e, y2, G, I, J, L, p, d, m;
+
+e=10
+if (y>1600) {
+ y2=Math.floor(y/100)
+ e=10+y2-16-Math.floor((y2-16)/4)
+}
+if (y<1583) { e=0 }
+
+G=y%19
+I=(19*G+15)%30
+J=(y+Math.floor(y/4)+I)%7
+L=I-J
+p=L+e
+d=1+(p+27+Math.floor((p+6)/40))%31
+m=3+Math.floor((p+26)/30)
+
+retval = {};
+retval["year"]=y; retval["month"]=m; retval["day"]=d;
+return retval;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const vcal_header = (function () {/*  
 BEGIN:VCALENDAR
 VERSION:2.0
@@ -87,6 +128,7 @@ X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 const vcal_footer = 'END:VCALENDAR';
 
 express()
+  .disable('x-powered-by')
   //.use(express.static(path.join(__dirname, 'public')))
   //.set('views', path.join(__dirname, 'views'))
   //.set('view engine', 'ejs')
@@ -117,6 +159,7 @@ express()
 		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY HH:mm:ss') + '\n'
 
 		+ vcal_footer + '\n'
+		+ JSON.stringify(greek_easter(req.query.from)) + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
