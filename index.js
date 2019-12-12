@@ -228,7 +228,6 @@ express()
 		+ vcal_header
 		  .replace("fromYear", fromYear).replace("toYear", toYear) + '\n'
 
-
 		+ vcal_footer + '\n'
 		+ JSON.stringify(hList) + '\n'
 
