@@ -265,10 +265,7 @@ express()
   	res.send(''
 		+ vcal_header
 		+hList.map(date2event).join().replace(/,/g,"\n")  //+ "\n"
-
 		+ vcal_footer + '\n'
-		+ JSON.stringify(hList) + '\n'
-
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
