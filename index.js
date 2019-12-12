@@ -168,9 +168,9 @@ if ( pmMoment.dayOfYear() >= moment(easterMoment).subtract(6,"days").dayOfYear()
   add_one(tm.date(), tm.month(), "Πρωτομαγιά")
 } else {
     if ( pmMoment.dayOfWeek() == 0 ) {  // Sunday
-      add_one(2, 5), "Πρωτομαγιά")
+      add_one(2, 5, "Πρωτομαγιά")
     } else {
-      add_one(1, 5), "Πρωτομαγιά")
+      add_one(1, 5, "Πρωτομαγιά")
     }
 }
 
