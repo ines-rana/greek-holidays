@@ -130,9 +130,9 @@ tobj.d=26; tobj.m=12; tobj.t="Δεύτερη ημέρα Χριστουγέννω
 
 
 var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
-easterMoment.year(ey.y)
-easterMoment.month(ey.m-1)	// month: 0-11
-easterMoment.date(ey.d)
+easterMoment.set("year",ey.y)
+easterMoment.set("month",ey.m-1)	// month: 0-11
+easterMoment.set("date",ey.d)
 
 
 tm = easterMoment
