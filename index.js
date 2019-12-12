@@ -156,9 +156,8 @@ tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; 
 console.log("+1", tm.format());
 
 tm = easterMoment.add(50,"days")
-console.log("50", tm.format());
-tobj={y:2021}
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Αγίου Πνεύματος"; list.push(tobj)
+console.log("50", tm.format());
 
 
 
