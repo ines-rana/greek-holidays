@@ -114,7 +114,7 @@ function ical_datestr(ts){
 
 
 function holidays(y){
-var ty = greek_easter(y)
+var ey = greek_easter(y)
 var tm, tobj
 var list = new Array();
 
@@ -128,13 +128,13 @@ tobj={}; tobj.d=26; tobj.m=12; tobj.y=y; tobj.t="Δεύτερη ημέρα Χρ�
 
 
 var easterm = moment.tz("2018-01-01 12:00:00",grTZ);
-easterm.year=ty.y
-easterm.month=ty.m-1	// month: 0-11
-easterm.date=ty.d
+easterm.year=ey.y
+easterm.month=ey.m-1	// month: 0-11
+easterm.date=ey.d
 
 
 tm = easterm
-tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Πάσχα"; list.push(tobj)
+tobj={}; tobj.d=tm.d; tobj.m=tm.m; tobj.y=y; tobj.t="Πάσχα"; list.push(tobj)
 
 tm = easterm.subtract(48,"days")
 tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
@@ -144,13 +144,13 @@ tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Καθαρά Δευτέρα
 //    ή με τη Δευτέρα του Πάσχα
 
 tm = easterm.subtract(2,"days")
-tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Μεγάλη Παρασκευή"; list.push(tobj)
+tobj={}; tobj.d=tm.d; tobj.m=tm.m; tobj.y=y; tobj.t="Μεγάλη Παρασκευή"; list.push(tobj)
 
 tm = easterm.add(1,"days")
-tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
+tobj={}; tobj.d=tm.d; tobj.m=tm.m; tobj.y=y; tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
 
 tm = easterm.add(50,"days")
-tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Αγίου Πνεύματος"; list.push(tobj)
+tobj={}; tobj.d=tm.d; tobj.m=tm.m; tobj.y=y; tobj.t="Αγίου Πνεύματος"; list.push(tobj)
 
 return list
 }
