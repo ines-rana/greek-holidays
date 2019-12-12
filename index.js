@@ -222,7 +222,7 @@ express()
 	}
   	res.send(''
 		+ vcal_header
-+hList.map(date2event).join() + "\n"
++hList.map(date2event).join().replace(",","\n") + "\n"
 
 		+ vcal_footer + '\n'
 		+ JSON.stringify(hList) + '\n'
