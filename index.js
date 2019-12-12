@@ -207,8 +207,6 @@ express()
 
 	var fromYear = Number(req.query.from)
 	var   toYear = Number(req.query.to)
-	if (isNaN(fromYear)) fromYear=thisYear
-	if (isNaN(toYear)) toYear=thisYear
 	if (isNaN(fromYear) && isNaN(toYear)) {
 		fromYear=thisYear - 5; toYear=thisYear + 5
 	} else {
