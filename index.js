@@ -219,7 +219,7 @@ express()
 	}
 
 
-	var hList = {}
+	var hList = []
 	for (var year=fromYear; year<=toYear; year++){
 		hList=hList.concat(holidays(year))
 	}
