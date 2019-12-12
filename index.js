@@ -133,6 +133,7 @@ var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
 easterMoment.set("year",ey.y)
 easterMoment.set("month",ey.m-1)	// month: 0-11
 easterMoment.set("date",ey.d)
+console.log(easterMoment.format());
 
 
 tm = easterMoment
@@ -148,6 +149,7 @@ tm = easterMoment.add(1,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
 
 tm = easterMoment.add(50,"days")
+console.log(tm.format());
 tobj={y:2021}
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Αγίου Πνεύματος"; list.push(tobj)
 
