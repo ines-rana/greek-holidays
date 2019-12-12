@@ -119,16 +119,16 @@ var tm, tobj={}
 var list = new Array();
 
 function add_one(ad, am, at){
-  var tobj={}; tobj.y=ay;tobj.m=am;tobj.d=ad;tobj.t=at; list.push(tobj);
+  var tobj={}; tobj.y=ay;tobj.m=am;tobj.d=ad;tobj.t=at);
 }
 
 add_one(1, 1, "Πρωτοχρονιά");
 add_one(1, 6, "Θεοφάνεια");
-add_one(25, 3, "Εθνική εορτή"; list.push(tobj)
-add_one(15, 8, "Κοίμηση της Θεοτόκου"; list.push(tobj)
-add_one(28, 10, "Εθνική εορτή "; list.push(tobj)
-add_one(25, 12, "Χριστούγεννα"; list.push(tobj)
-add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων"; list.push(tobj)
+add_one(25, 3, "Εθνική εορτή")
+add_one(15, 8, "Κοίμηση της Θεοτόκου")
+add_one(28, 10, "Εθνική εορτή ")
+add_one(25, 12, "Χριστούγεννα")
+add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
 
 
 var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
