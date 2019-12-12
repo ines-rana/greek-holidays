@@ -217,9 +217,12 @@ express()
 		hList=hList.concat(holidays(year))
 	}
 
+	function date2event(dobj){
+		return dobj.t
+	}
   	res.send(''
 		+ vcal_header
-+hList.map(JSON.stringify).join() + "\n"
++hList.map(date2event).join() + "\n"
 
 		+ vcal_footer + '\n'
 		+ JSON.stringify(hList) + '\n'
