@@ -184,15 +184,13 @@ return list
 
 
 
-const vcal_event = (function () {/*  
-BEGIN:VEVENT
+const vcal_event = (function () {/*BEGIN:VEVENT
 UID:19970610T172345Z-AF23B2@example.com
 DTSTAMP:19970610T172345Z
 DTSTART:19970714T170000Z
 DTEND:19970715T040000Z
 SUMMARY:summary
 END:VEVENT
-END:VCALENDAR
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
@@ -252,7 +250,7 @@ express()
 		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
 		var t=vcal_event;
 		return (
-		  d1+" "+dobj.t+"\n" +
+		  moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t+"\n" +
 		  t.replace("summary", dobj.t)
 	//+" "+ical_datestr(d2)+" "+dobj.t
 		)
