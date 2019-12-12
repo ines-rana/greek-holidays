@@ -148,6 +148,7 @@ tm = easterMoment.add(1,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
 
 tm = easterMoment.add(50,"days")
+tobj={y:2021}
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Αγίου Πνεύματος"; list.push(tobj)
 
 
