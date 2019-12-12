@@ -102,19 +102,19 @@ easterMoment.set("date",ey.date)
 
 
 tm = moment(easterMoment)	// clone moment
-add_one(tm.date(), tm.month(), "Πάσχα")
+add_one(tm.date(), tm.month()+1, "Πάσχα")
 
 tm = moment(easterMoment).subtract(48,"days")
-add_one(tm.date(), tm.month(), "Καθαρά Δευτέρα")
+add_one(tm.date(), tm.month()+1, "Καθαρά Δευτέρα")
 
 tm = moment(easterMoment).subtract(2,"days")
-add_one(tm.date(), tm.month(), "Μεγάλη Παρασκευή")
+add_one(tm.date(), tm.month()+1, "Μεγάλη Παρασκευή")
 
 tm = moment(easterMoment).add(1,"days")
-add_one(tm.date(), tm.month(), "Δευτέρα του Πάσχα")
+add_one(tm.date(), tm.month()+1, "Δευτέρα του Πάσχα")
 
 tm = moment(easterMoment).add(50,"days")
-add_one(tm.date(), tm.month(), "Αγίου Πνεύματος")
+add_one(tm.date(), tm.month()+1, "Αγίου Πνεύματος")
 
 
 
@@ -132,7 +132,7 @@ if ( pmMoment.dayOfYear() >= moment(easterMoment).subtract(6,"days").dayOfYear()
      && pmMoment.dayOfYear() <= moment(easterMoment).add(1,"days").dayOfYear() )
 {
   tm = moment(easterMoment).add(2,"days")	// Τρίτη του Πάσχα
-  add_one(tm.date(), tm.month(), "Πρωτομαγιά")
+  add_one(tm.date(), tm.month()+1, "Πρωτομαγιά")
 } else {
     if ( pmMoment.day() == 0 ) {  // 0-6  : Sunday-Saturday
       add_one(2, 5, "Πρωτομαγιά")
