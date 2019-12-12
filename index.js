@@ -172,8 +172,8 @@ const vcal_header = (function () {/*
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
-  Optional parameters: ?from=from_year&to=to_year
-X-WR-CALNAME:Ελληνικές αργίες fromYear - toYear
+  Optional parameters: ?from=year1&to=year2
+X-WR-CALNAME:Ελληνικές αργίες
 X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα fromYear - toYear
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
 X-PUBLISHED-TTL:PT48H
@@ -219,8 +219,6 @@ express()
 
   	res.send(''
 		+ vcal_header
-		  .replace("fromYear", toString(fromYear))
-		  .replace("toYear", toString(toYear)) + '\n'
 
 		+ vcal_footer + '\n'
 		+ JSON.stringify(hList) + '\n'
