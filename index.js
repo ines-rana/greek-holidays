@@ -141,23 +141,23 @@ console.log("15", easterMoment.format());
 
 
 tm = moment(easterMoment)	// clone moment
-add_one(tm.date(), tm.month(), "Πάσχα"; list.push(tobj)
+add_one(tm.date(), tm.month(), "Πάσχα")
 console.log("00", tm.format());
 
 tm = moment(easterMoment).subtract(48,"days")
-add_one(tm.date(), tm.month(), "Καθαρά Δευτέρα"; list.push(tobj)
+add_one(tm.date(), tm.month(), "Καθαρά Δευτέρα")
 console.log("-48", tm.format());
 
 tm = moment(easterMoment).subtract(2,"days")
-add_one(tm.date(), tm.month(), "Μεγάλη Παρασκευή"; list.push(tobj)
+add_one(tm.date(), tm.month(), "Μεγάλη Παρασκευή")
 console.log("-2", tm.format());
 
 tm = moment(easterMoment).add(1,"days")
-add_one(tm.date(), tm.month(), "Δευτέρα του Πάσχα"; list.push(tobj)
+add_one(tm.date(), tm.month(), "Δευτέρα του Πάσχα")
 console.log("+1", tm.format());
 
 tm = moment(easterMoment).add(50,"days")
-add_one(tm.date(), tm.month(), "Αγίου Πνεύματος"; list.push(tobj)
+add_one(tm.date(), tm.month(), "Αγίου Πνεύματος")
 console.log("50", tm.format());
 
 
