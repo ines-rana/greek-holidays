@@ -203,7 +203,7 @@ express()
 	res.append('Access-Control-Allow-Headers', 'Content-Type');
 
 	var now = moment().tz(grTZ);
-	const thisYear=now.format('YYYY');
+	const thisYear=Number(now.format('YYYY'));
 
 	var fromYear = Number(req.query.from)
 	var   toYear = Number(req.query.to)
