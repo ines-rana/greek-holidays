@@ -187,11 +187,11 @@ return list
 
 
 const vcal_event = (function () {/*BEGIN:VEVENT
-DESCRIPTION:summary
-SUMMARY:summary
+DESCRIPTION;LANGUAGE=el:summary
+SUMMARY;LANGUAGE=el:summary
 DTSTART:dtstart
 DTEND:dtend
-COMMENT:comment
+COMMENT;LANGUAGE=el:comment
 UID:uid
 DTSTAMP:dtstamp
 END:VEVENT*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
@@ -201,12 +201,13 @@ const vcal_header = (function () {/*BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
-X-WR-CALNAME:Ελληνικές αργίες
-X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα
+X-WR-CALNAME;LANGUAGE=el:Ελληνικές αργίες
+X-WR-CALDESC;LANGUAGE=el:Επίσημες αργίες στην Ελλάδα
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
 X-PUBLISHED-TTL:PT48H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
+LOCATION;LANGUAGE=el:Ελλάς
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 const vcal_footer = '\nEND:VCALENDAR\r';
