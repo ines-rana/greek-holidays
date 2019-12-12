@@ -254,7 +254,7 @@ express()
 		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
 		var t=vcal_event;
 		return (
-		  t.replace("summary", dobj.t)
+		  t.replace(/summary/g, dobj.t)
 		   .replace("dtstart",ical_datestr(d1))
 		   .replace("dtend",ical_datestr(d2))
 		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
