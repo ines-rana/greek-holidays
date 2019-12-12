@@ -130,14 +130,13 @@ tobj.d=26; tobj.m=12; tobj.t="Δεύτερη ημέρα Χριστουγέννω
 
 
 var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
-console.log(easterMoment.format());
+console.log("10", easterMoment.format());
 easterMoment.set("year",ey.y)
 easterMoment.set("month",ey.m-1)	// month: 0-11
 easterMoment.set("date",ey.d)
-console.log(easterMoment.format());
+console.log("15", easterMoment.format());
 
 
-var tm = require('moment-timezone');
 tm = easterMoment
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Πάσχα"; list.push(tobj)
 
