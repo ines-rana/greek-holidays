@@ -145,12 +145,15 @@ console.log("00", tm.format());
 
 tm = easterMoment.subtract(48,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
+console.log("-48", tm.format());
 
 tm = easterMoment.subtract(2,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Μεγάλη Παρασκευή"; list.push(tobj)
+console.log("-2", tm.format());
 
 tm = easterMoment.add(1,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
+console.log("+1", tm.format());
 
 tm = easterMoment.add(50,"days")
 console.log("50", tm.format());
