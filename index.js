@@ -216,7 +216,7 @@ express()
   //.set('views', path.join(__dirname, 'views'))
   //.set('view engine', 'ejs')
   .get('/', (req, res, next) => {
-	res.append('Content-Type', 'text/plain; charset=utf-8');
+	res.append('Content-Type', 'text/calendar; charset=utf-8');
 		// allow XHR calls (CORS)
 	res.append('Access-Control-Allow-Origin', ['*']);
 	res.append('Access-Control-Allow-Methods', 'GET');
