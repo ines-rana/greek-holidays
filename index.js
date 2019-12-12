@@ -187,6 +187,7 @@ return list
 
 
 const vcal_event = (function () {/*BEGIN:VEVENT
+DESCRIPTION:summary
 SUMMARY:summary
 DTSTART:dtstart
 DTEND:dtend
