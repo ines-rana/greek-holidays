@@ -1,6 +1,21 @@
 // produce a list of official greek holidays in iCalendar (RFC 5545) format
 // Content-Type: text/calendar; charset="UTF-8"
 
+//	Αν χρειάζεσαι μια πηγή αργιών σε μορφή iCalendar χρησιμοποίησε το
+//	 
+//	https://greek-holidays.herokuapp.com
+//	      (αργίες για το τρέχον έτος και 5 έτη μπροστά/πίσω)
+//			ή
+//	https://greek-holidays.herokuapp.com?from=2017&to=2021
+//	      (αργίες για τα καθοριζόμενα έτη)
+//	 
+//	Μπορείς να τις δεις και σε ένα (άδειο) δυναμικό ημερολόγιο
+//	
+//	https://i-cal.herokuapp.com/calendar.html
+
+
+
+
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
