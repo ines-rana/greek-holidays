@@ -77,6 +77,7 @@ add_one(25, 3, "Εθνική εορτή")
 add_one(15, 8, "Κοίμηση της Θεοτόκου")
 add_one(28, 10, "Εθνική εορτή ")
 add_one(25, 12, "Χριστούγεννα")
+add_one(25, 12, "Δεύτερη ημέρα Χριστουγέννων")
 
 
 var easterMoment = moment.tz({year:2000}, grTZ);	// dummy date
@@ -148,7 +149,7 @@ LOCATION;LANGUAGE=el:Ελλάς
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 const vcal_event = (function () {/*BEGIN:VEVENT
-DESCRIPTION;LANGUAGE=el:comment
+DESCRIPTION;LANGUAGE=el:description
 SUMMARY;LANGUAGE=el:summary
 DTSTART:dtstart
 DTEND:dtend
@@ -210,6 +211,7 @@ express()
 		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
 		   .replace("uid",uuidv1()+"_"+ical_datestr(d1))
 		   .replace(/comment/g,moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
+		   .replace("description",moment.tz(o,grTZ).format("DD/MM/YYYY"))
 		)
 	}
 
