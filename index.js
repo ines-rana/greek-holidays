@@ -236,11 +236,16 @@ express()
 	}
 
 	function date2event(dobj){
-		return dobj.t
+		var o={};o["year"]=dobj.y; o["month"]=dobj.m; o["date"]=dobj.d;
+		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
+		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
+		return ical_datestr(d1)+"  +ical_datestr(d2)+" "+dobj.t
 	}
+
+
   	res.send(''
 		+ vcal_header
-+hList.map(date2event).join().replace(/,/g,"\n") + "\n"
+		+hList.map(date2event).join().replace(/,/g,"\n") + "\n"
 
 		+ vcal_footer + '\n'
 		+ JSON.stringify(hList) + '\n'
