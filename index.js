@@ -219,6 +219,7 @@ express()
 
   	res.send(''
 		+ vcal_header
++hList.map(JSON.stringify).join() + "\n"
 
 		+ vcal_footer + '\n'
 		+ JSON.stringify(hList) + '\n'
