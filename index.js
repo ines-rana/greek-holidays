@@ -92,10 +92,10 @@ if (y<1583) { e=0 }
 G=y%19
 I=(19*G+15)%30
 J=(y+Math.floor(y/4)+I)%7
-print ("y", y)
-print ("Math.floor(y/4)", Math.floor(y/4))
-print ("I", I)
-print ("y+Math.floor(y/4)+I", y+Math.floor(y/4)+I)
+console.log ("y", y)
+console.log ("Math.floor(y/4)", Math.floor(y/4))
+console.log ("I", I)
+console.log ("y+Math.floor(y/4)+I", y+Math.floor(y/4)+I)
 L=I-J
 p=L+e
 d=1+(p+27+Math.floor((p+6)/40))%31
