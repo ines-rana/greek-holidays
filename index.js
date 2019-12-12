@@ -158,7 +158,7 @@ express()
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
 + 'DTSTAMP:19970610T172345Z' + '\n'
-		+ 'DTSTAMP:' + ical_timestamp(2018-01-06 00:00:00") + '\n'
+		+ 'DTSTAMP:' + ical_timestamp("2018-01-06 00:00:00") + '\n'
 		+ 'DTSTAMP:' + now.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z' + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
