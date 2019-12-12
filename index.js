@@ -97,6 +97,7 @@ p=L+e
 d=1+(p+27+Math.floor((p+6)/40))%31
 m=3+Math.floor((p+26)/30)
 
+console.log ( e, y2, G, I, J, L, p, d, m);
 retval["year"]=y; retval["month"]=m; retval["date"]=d;
 return retval;
 }
