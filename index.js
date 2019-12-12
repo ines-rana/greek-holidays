@@ -118,10 +118,15 @@ console.log("00 ey"); console.log(ey);
 var tm, tobj={}
 var list = new Array();
 
+function add_one(ad, am, ay, at){
+  var tobj={}; tobj.y=ay;tobj.m=am;tobj.d=ad;tobj.t=at; list.push(tobj);
+}
 tobj.y=y
 
-tobj={}; tobj.d=1;  tobj.m=1;  tobj.t="Πρωτοχρονιά"; list.push(tobj)
-tobj={}; tobj.d=6;  tobj.m=1;  tobj.t="Θεοφάνεια"; list.push(tobj)
+add_one(1,1,y,"Πρωτοχρονιά");
+add_one(1,6,y,"Θεοφάνεια");
+//tobj={}; tobj.d=1;  tobj.m=1;  tobj.t="Πρωτοχρονιά"; list.push(tobj)
+//tobj={}; tobj.d=6;  tobj.m=1;  tobj.t="Θεοφάνεια"; list.push(tobj)
 tobj={}; tobj.d=25; tobj.m=3;  tobj.t="Εθνική εορτή"; list.push(tobj)
 tobj={}; tobj.d=15; tobj.m=8;  tobj.t="Κοίμηση της Θεοτόκου"; list.push(tobj)
 tobj={}; tobj.d=28; tobj.m=10; tobj.t="Εθνική εορτή "; list.push(tobj)
