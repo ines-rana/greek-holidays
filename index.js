@@ -122,9 +122,8 @@ function ical_datestr(ts){
 
 
 
-function holidays(inpy){
-var y=Number(inpy)
-var ey = greek_easter(y)
+function holidays(y){
+var ey = greek_easter(Number(y))
 console.log("00 ey"); console.log(ey);
 var tm, tobj={}
 var list = new Array();
