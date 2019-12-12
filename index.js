@@ -193,8 +193,7 @@ DTEND:dtend
 COMMENT:comment
 UID:uid
 DTSTAMP:dtstamp
-END:VEVENT
-*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+END:VEVENT*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
 const vcal_header = (function () {/*BEGIN:VCALENDAR
@@ -207,7 +206,6 @@ REFRESH-INTERVAL;VALUE=DURATION:PT48H
 X-PUBLISHED-TTL:PT48H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 const vcal_footer = 'END:VCALENDAR';
