@@ -15,7 +15,7 @@ const moment = require('moment-timezone');	// date manipulation library
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
-const uuidv1 = require('uuid/v4');		// uuidv4();
+const uuidv1 = require('uuid/v1');		// uuidv1();
 
 /* https://tools.ietf.org/html/rfc5545
 
@@ -256,7 +256,7 @@ express()
 		   .replace("dtstart",ical_datestr(d1))
 		   .replace("dtend",ical_datestr(d2))
 		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
-		   .replace("uid",uuidv1())
+		   .replace("uid",uuidv1()+"_"+ical_datestr(d1))
 		   .replace("comment",moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
 		)
 	}
