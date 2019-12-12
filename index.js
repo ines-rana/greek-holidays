@@ -15,6 +15,8 @@ const moment = require('moment-timezone');	// date manipulation library
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
+const uuidv1 = require('uuid/v1');		// uuidv1();
+
 /* https://tools.ietf.org/html/rfc5545
 
 LOCATION;LANGUAGE=el:Ελλάς
@@ -185,10 +187,10 @@ return list
 
 
 const vcal_event = (function () {/*BEGIN:VEVENT
-UID:19970610T172345Z-AF23B2@example.com
-DTSTAMP:19970610T172345Z
-DTSTART:19970714T170000Z
-DTEND:19970715T040000Z
+UID:uid
+DTSTAMP:dtstamp
+DTSTART:dtstart
+DTEND:dtend
 SUMMARY:summary
 END:VEVENT
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
@@ -252,7 +254,10 @@ express()
 		return (
 		  moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t+"\n" +
 		  t.replace("summary", dobj.t)
-	//+" "+ical_datestr(d2)+" "+dobj.t
+		   .replace("dtend",ical_datestr(d1))
+		   .replace("dtstart",ical_datestr(d2))
+		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
+		   .replace("uid",uuidv1())
 		)
 	}
 
