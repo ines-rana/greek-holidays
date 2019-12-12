@@ -240,6 +240,7 @@ express()
 		var o={};o["year"]=dobj.y; o["month"]=dobj.m; o["date"]=dobj.d;
 		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
 		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
+console.log("d1 string", d1, o)
 		return ical_datestr(d1)+" "+ical_datestr(d2)+" "+dobj.t
 	}
 
