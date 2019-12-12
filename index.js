@@ -119,7 +119,7 @@ var tm, tobj={}
 var list = new Array();
 
 function add_one(ad, am, at){
-  var tobj={}; tobj.y=y; tobj.m=am; tobj.d=ad; tobj.t=at;
+  var tobj={}; tobj.y=y; tobj.m=am; tobj.d=ad; tobj.t=at; list.push(tobj)
 }
 
 add_one(1, 1, "Πρωτοχρονιά");
