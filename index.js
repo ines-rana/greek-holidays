@@ -150,7 +150,6 @@ add_one(tm.date(), tm.month(), "Δευτέρα του Πάσχα")
 
 tm = moment(easterMoment).add(50,"days")
 add_one(tm.date(), tm.month(), "Αγίου Πνεύματος")
-console.log("50", tm.format());
 
 
 
@@ -158,6 +157,23 @@ console.log("50", tm.format());
 //    Μετατίθεται σε άλλη εργάσιμη ημέρα,
 //    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
 //    ή με τη Δευτέρα του Πάσχα
+var pmMoment = moment.tz({year:2000}, grTZ);	// dummy date
+pmMoment.year(ey.year)
+pmMoment.set("month",5 -1)	// month: 0-11
+pmMoment.set("date",1)
+if ( pmMoment.dayOfYear() >= moment(easterMoment).subtract(6,"days").dayOfYear()
+     && pmMoment.dayOfYear() <= moment(easterMoment).add(1,"days").dayOfYear() )
+{
+  tm = moment(easterMoment).add(2,"days")	// Τρίτη του Πάσχα
+  add_one(tm.date(), tm.month(), "Πρωτομαγιά")
+} else {
+    if ( pmMoment.dayOfWeek() == 0 ) {  // Sunday
+      add_one(2, 5), "Πρωτομαγιά")
+    } else {
+      add_one(1, 5), "Πρωτομαγιά")
+    }
+}
+
 
 return list
 }
