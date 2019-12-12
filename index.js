@@ -116,7 +116,7 @@ function ical_datestr(ts){
 function holidays(y){
 var ty = greek_easter(y)
 var tm, tobj
-var list=[]
+var list = new Array();
 
 tobj={}; tobj.d=1;  tobj.m=1;  tobj.y=y; tobj.t="Πρωτοχρονιά"; list.push(tobj)
 tobj={}; tobj.d=6;  tobj.m=1;  tobj.y=y; tobj.t="Θεοφάνεια"; list.push(tobj)
