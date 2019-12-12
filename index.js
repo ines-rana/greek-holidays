@@ -15,7 +15,7 @@ const moment = require('moment-timezone');	// date manipulation library
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
-const uuidv1 = require('uuid/v1');		// uuidv1();
+const uuidv1 = require('uuid/v4');		// uuidv4();
 
 /* https://tools.ietf.org/html/rfc5545
 
