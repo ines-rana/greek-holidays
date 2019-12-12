@@ -229,7 +229,7 @@ express()
 
 		+ vcal_footer + '\n'
 		+ "easter: " + JSON.stringify(greek_easter(req.query.from)) + '\n'
-		+ JSON.stringify(holidays(req.query.from)) + '\n'
+		+ JSON.stringify(holidays(fromYear)) + '\n'
 		+ fromYear + " - " + toYear + '\n'
         );
   })
