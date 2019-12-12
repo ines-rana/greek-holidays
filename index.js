@@ -137,7 +137,7 @@ tm = easterm
 tobj={}; tobj.d=tm.d; tobj.m=tm.m; tobj.y=y; tobj.t="Πάσχα"; list.push(tobj)
 
 tm = easterm.subtract(48,"days")
-tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
+tobj={}; tobj.d=tm.d; tobj.m=tm.m; tobj.y=y; tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
 //1/5 Πρωτομαγιά
 //    Μετατίθεται σε άλλη εργάσιμη ημέρα,
 //    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
