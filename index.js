@@ -80,7 +80,7 @@ function greek_easter(y){
 if (y<1923 || y>4099){return("year must be between 1923 and 4099");}
 
 var retval = {};
-var e=0, y2=0, G=0, I=0, J=0, L=0, p=0, d=0, m=0;   // make them numbers
+var e=0, y2=0, G=0, I=0, J=0, L=0, p=0, d=0, m=0;   // make sure they are used as numbers (rather than strings)
 
 e=10
 if (y>1600) {
@@ -91,11 +91,11 @@ if (y<1583) { e=0 }
 
 G=y%19
 I=(19*G+15)%30
-J=(y+Math.floor(y/4)+I)%7
+J=(y+Math.floor(y/4)+I) % 7
 console.log ("y", y)
 console.log ("Math.floor(y/4)", Math.floor(y/4))
 console.log ("I", I)
-console.log ("y+Math.floor(y/4)+I", y+Math.floor(y/4)+I)
+console.log ("y+Math.floor(y/4)+I", (y+Math.floor(y/4)+I) )
 L=I-J
 p=L+e
 d=1+(p+27+Math.floor((p+6)/40))%31
