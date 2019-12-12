@@ -91,20 +91,12 @@ if (y<1583) { e=0 }
 
 G=y%19
 I= (19*G+15)%30
-J= (y+ (Math.floor(y/4)) +I)
-console.log ("old J", J)
-J= J % 7
-console.log ("new J", J)
-console.log ("y", y)
-console.log ("Math.floor(y/4)", Math.floor(y/4))
-console.log ("I", I)
-console.log ("y+Math.floor(y/4)+I", (y+Math.floor(y/4)+I) )
+J= (y+ (Math.floor(y/4)) +I) % 7
 L=I-J
 p=L+e
 d=1+(p+27+Math.floor((p+6)/40))%31
 m=3+Math.floor((p+26)/30)
 
-console.log ( e, y2, G, I, J,    L, p, d, m);
 retval["year"]=y; retval["month"]=m; retval["date"]=d;
 return retval;
 }
