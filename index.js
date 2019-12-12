@@ -115,6 +115,7 @@ function ical_datestr(ts){
 
 function holidays(y){
 var ey = greek_easter(y)
+console.log("00 ey"); console.log(ey);
 var tm, tobj={}
 var list = new Array();
 
