@@ -119,7 +119,7 @@ var tm, tobj={}
 var list = new Array();
 
 function add_one(ad, am, at){
-  var tobj={}; tobj.y=ay;tobj.m=am;tobj.d=ad;tobj.t=at);
+  var tobj={}; tobj.y=y; tobj.m=am; tobj.d=ad; tobj.t=at;
 }
 
 add_one(1, 1, "Πρωτοχρονιά");
@@ -132,7 +132,6 @@ add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
 
 
 var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
-console.log("10", easterMoment.format());
 console.log("12 greek_easter(",y,") returns:", ey.year, ey.month, ey.date);
 easterMoment.year(ey.year)
 easterMoment.set("month",ey.month-1)	// month: 0-11
