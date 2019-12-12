@@ -131,7 +131,7 @@ add_one(25, 12, "Χριστούγεννα")
 add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
 
 
-var easterMoment = moment.tz("2000-01-01",grTZ);
+var easterMoment = moment.tz({year:2000}, grTZ);	// dummy date
 easterMoment.year(ey.year)
 easterMoment.set("month",ey.month-1)	// month: 0-11
 easterMoment.set("date",ey.date)
