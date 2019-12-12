@@ -97,7 +97,7 @@ p=L+e
 d=1+(p+27+Math.floor((p+6)/40))%31
 m=3+Math.floor((p+26)/30)
 
-retval["year"]=y; retval["month"]=m; retval["day"]=d;
+retval["year"]=y; retval["month"]=m; retval["date"]=d;
 return retval;
 }
 
@@ -133,9 +133,9 @@ tobj.d=26; tobj.m=12; tobj.t="Δεύτερη ημέρα Χριστουγέννω
 var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
 console.log("10", easterMoment.format());
 console.log("12", ey.y, ey.m, ey.d);
-easterMoment.year(ey.y)
-easterMoment.set("month",ey.m-1)	// month: 0-11
-easterMoment.set("date",ey.d)
+easterMoment.year(ey.year)
+easterMoment.set("month",ey.month-1)	// month: 0-11
+easterMoment.set("date",ey.date)
 console.log("15", easterMoment.format());
 
 
