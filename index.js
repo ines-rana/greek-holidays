@@ -136,20 +136,20 @@ easterm.date=ty.d
 tm = easterm
 tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Πάσχα"; list.push(tobj)
 
-tm = easterm.subtact(48,'days")
+tm = easterm.subtact(48,"days")
 tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
 //1/5 Πρωτομαγιά
 //    Μετατίθεται σε άλλη εργάσιμη ημέρα,
 //    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
 //    ή με τη Δευτέρα του Πάσχα
 
-tm = easterm.subtact(2,'days")
+tm = easterm.subtact(2,"days")
 tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Μεγάλη Παρασκευή"; list.push(tobj)
 
-tm = easterm.add(1,'days")
+tm = easterm.add(1,"days")
 tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
 
-tm = easterm.add(50,'days")
+tm = easterm.add(50,"days")
 tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Αγίου Πνεύματος"; list.push(tobj)
 
 return list
