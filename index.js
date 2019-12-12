@@ -219,6 +219,11 @@ express()
 	}
 
 
+	var hList = {}
+	for (var year=fromYear; year<=toYear; year++){
+		hList=hList.concat(holidays(year))
+	}
+
   	res.send(''
 		+ vcal_header + '\n'
 
@@ -239,7 +244,7 @@ express()
 
 		+ vcal_footer + '\n'
 		+ "easter: " + JSON.stringify(greek_easter(fromYear)) + '\n'
-		+ JSON.stringify(holidays(fromYear)) + '\n'
+		+ JSON.stringify(hList) + '\n'
 		+ fromYear + " - " + toYear + '\n'
         );
   })
