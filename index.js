@@ -208,7 +208,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
-const vcal_footer = 'END:VCALENDAR';
+const vcal_footer = '\nEND:VCALENDAR\r';
 
 express()
   .disable('x-powered-by')
@@ -265,7 +265,7 @@ express()
   	res.send(''
 		+ vcal_header
 		+ hList.map(date2event).join().replace(/,/g,"\n") 
-		+ vcal_footer + '\r\n'
+		+ vcal_footer
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
@@ -291,7 +291,7 @@ express()
 		+ moment.tz("2018-01-01 23:59:59",grTZ).tz('UTC').format('DD/MM/YYYY HH:mm:ss') + '\n'
 
 
-		+ vcal_footer + '\n'
+		+ vcal_footer
 		+ "easter: " + JSON.stringify(greek_easter(fromYear)) + '\n'
 		+ JSON.stringify(hList) + '\n'
 		+ fromYear + " - " + toYear + '\n'
