@@ -102,7 +102,7 @@ return retval;
 }
 
 
-// format ts string in local timezone (1997-06-10) as 19970609T210000Z
+// format ts string in local timezone (1997-01-06) as 19970105T220000Z
 function ical_timestamp(ts){
   var td = moment.tz(ts +" 00:00:00", grTZ);
   return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z'
@@ -156,7 +156,7 @@ express()
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
 + 'DTSTAMP:19970610T172345Z' + '\n'
-		+ 'DTSTAM2:' + ical_timestamp("2018-01-06") + '\n'
+		+ 'DTSTAM2:' + ical_timestamp("1997-01-06") + '\n'
 		+ 'DTSTAMP:' + now.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z' + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
