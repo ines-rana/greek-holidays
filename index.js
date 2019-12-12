@@ -255,8 +255,8 @@ express()
 		var t=vcal_event;
 		return (
 		  t.replace("summary", dobj.t)
-		   .replace("dtend",ical_datestr(d1))
-		   .replace("dtstart",ical_datestr(d2))
+		   .replace("dtstart",ical_datestr(d1))
+		   .replace("dtend",ical_datestr(d2))
 		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
 		   .replace("uid",uuidv1())
 		   .replace("comment",moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
