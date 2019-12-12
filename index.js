@@ -227,6 +227,21 @@ express()
   	res.send(''
 		+ vcal_header + '\n'
 
+
+		+ vcal_footer + '\n'
+		+ JSON.stringify(hList) + '\n'
+
+		+ fromYear + " - " + toYear + '\n'
+        );
+  })
+  .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
+
+
+
+/* debugging
+  	res.send(''
+		+ vcal_header + '\n'
+
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
 		+ 'DTSTAMP:' + ical_datestr("1997-01-06") + '\n'
@@ -247,7 +262,4 @@ express()
 		+ JSON.stringify(hList) + '\n'
 		+ fromYear + " - " + toYear + '\n'
         );
-  })
-  .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
-
-
+*/
