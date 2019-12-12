@@ -131,7 +131,7 @@ add_one(25, 12, "Χριστούγεννα")
 add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
 
 
-var easterMoment = moment.tz("",grTZ);
+var easterMoment = moment.tz("2000-01-01",grTZ);
 easterMoment.year(ey.year)
 easterMoment.set("month",ey.month-1)	// month: 0-11
 easterMoment.set("date",ey.date)
@@ -139,6 +139,7 @@ console.log("15", easterMoment.format());
 
 
 tm = moment(easterMoment)	// clone moment
+console.log("00", tm.format());
 add_one(tm.date(), tm.month(), "Πάσχα")
 console.log("00", tm.format());
 
