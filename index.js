@@ -205,8 +205,11 @@ express()
 	var now = moment().tz(grTZ);
 	const thisYear=now.format('YYYY');
 
-	const fromYear = Number(req.query.from)
-	const   toYear = Number(req.query.to)
+	var fromYear = Number(req.query.from)
+	if (isNaN(fromYear)) fromYear=thisYear
+	var   toYear = Number(req.query.to)
+	if (isNaN(toYear)) toYear=thisYear
+
 
   	res.send(''
 		+ vcal_header + '\n'
@@ -216,8 +219,7 @@ express()
 		+ 'DTSTAMP:' + ical_datestr("1997-01-06") + '\n'
 		+ 'DTSTAMP:' + now.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z' + '\n'
 		+ thisYear + '\n'
-		+ req.query.from + '\n'
-		+ req.query.to + '\n'
+		+ fromYear + " - " + toYear + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).format() + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).format('DD/MM/YYYY HH:mm:ss') + '\n'
 		+ moment.tz("2018-01-01 00:00:00",grTZ).tz('UTC').format('DD/MM/YYYY HH:mm:ss') + '\n'
