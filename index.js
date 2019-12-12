@@ -187,17 +187,17 @@ return list
 
 
 const vcal_event = (function () {/*BEGIN:VEVENT
-UID:uid
-DTSTAMP:dtstamp
+SUMMARY:summary
 DTSTART:dtstart
 DTEND:dtend
-SUMMARY:summary
+COMMENT:comment
+UID:uid
+DTSTAMP:dtstamp
 END:VEVENT
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
-const vcal_header = (function () {/*  
-BEGIN:VCALENDAR
+const vcal_header = (function () {/*BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
@@ -246,18 +246,20 @@ express()
 	}
 
 	function date2event(dobj){
-		var o={};o["year"]=dobj.y; o["month"]=dobj.m -1; //month: 0-11
+		var o={}
+		    o["year"]=dobj.y;
+		    o["month"]=dobj.m -1; //month: 0-11
 		    o["date"]=dobj.d;
 		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
 		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
 		var t=vcal_event;
 		return (
-		  moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t+"\n" +
 		  t.replace("summary", dobj.t)
 		   .replace("dtend",ical_datestr(d1))
 		   .replace("dtstart",ical_datestr(d2))
 		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
 		   .replace("uid",uuidv1())
+		   .replace("comment",moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
 		)
 	}
 
