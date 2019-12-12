@@ -135,25 +135,19 @@ var easterMoment = moment.tz({year:2000}, grTZ);	// dummy date
 easterMoment.year(ey.year)
 easterMoment.set("month",ey.month-1)	// month: 0-11
 easterMoment.set("date",ey.date)
-console.log("15", easterMoment.format());
 
 
 tm = moment(easterMoment)	// clone moment
-console.log("00", tm.format());
 add_one(tm.date(), tm.month(), "Πάσχα")
-console.log("00", tm.format());
 
 tm = moment(easterMoment).subtract(48,"days")
 add_one(tm.date(), tm.month(), "Καθαρά Δευτέρα")
-console.log("-48", tm.format());
 
 tm = moment(easterMoment).subtract(2,"days")
 add_one(tm.date(), tm.month(), "Μεγάλη Παρασκευή")
-console.log("-2", tm.format());
 
 tm = moment(easterMoment).add(1,"days")
 add_one(tm.date(), tm.month(), "Δευτέρα του Πάσχα")
-console.log("+1", tm.format());
 
 tm = moment(easterMoment).add(50,"days")
 add_one(tm.date(), tm.month(), "Αγίου Πνεύματος")
