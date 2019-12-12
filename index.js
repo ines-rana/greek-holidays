@@ -174,7 +174,7 @@ VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
 X-WR-CALNAME:Ελληνικές αργίες
-X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα fromYear - toYear
+X-WR-CALDESC:Επίσημες αργίες στην Ελλάδα
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
 X-PUBLISHED-TTL:PT48H
 CALSCALE:GREGORIAN
