@@ -74,11 +74,12 @@ END:VEVENT
 
 
 // υπολογισμός ημέρας/μήνα του ελληνορθοδόξου Πάσχα για το έτος y
-function greek_easter(y){
+function greek_easter(inpy){
 // η Ελλάδα υιοθέτησε το γρηγοριανό ημερολόγιο το 1923,
 // η καθολική Ευρώπη το 1582
 if (y<1923 || y>4099){return("year must be between 1923 and 4099");}
 
+var y=Number(inpy)
 var retval = {};
 var e=0, y2=0, G=0, I=0, J=0, L=0, p=0, d=0, m=0;   // make sure they are used as numbers (rather than strings)
 
@@ -90,8 +91,8 @@ if (y>1600) {
 if (y<1583) { e=0 }
 
 G=y%19
-I=Number(19*G+15)%30
-J= Number(y+ (Math.floor(y/4)) +I)
+I= (19*G+15)%30
+J= (y+ (Math.floor(y/4)) +I)
 console.log ("old J", J)
 J= J % 7
 console.log ("new J", J)
@@ -121,7 +122,8 @@ function ical_datestr(ts){
 
 
 
-function holidays(y){
+function holidays(inpy){
+var y=Number(inpy)
 var ey = greek_easter(y)
 console.log("00 ey"); console.log(ey);
 var tm, tobj={}
