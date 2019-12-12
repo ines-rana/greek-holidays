@@ -141,6 +141,7 @@ console.log("15", easterMoment.format());
 
 tm = easterMoment
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Πάσχα"; list.push(tobj)
+console.log("00", tm.format());
 
 tm = easterMoment.subtract(48,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
@@ -152,7 +153,7 @@ tm = easterMoment.add(1,"days")
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
 
 tm = easterMoment.add(50,"days")
-console.log(tm.format());
+console.log("50", tm.format());
 tobj={y:2021}
 tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Αγίου Πνεύματος"; list.push(tobj)
 
