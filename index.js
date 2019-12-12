@@ -157,7 +157,8 @@ add_one(tm.date(), tm.month(), "Αγίου Πνεύματος")
 //    Μετατίθεται σε άλλη εργάσιμη ημέρα,
 //    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
 //    ή με τη Δευτέρα του Πάσχα
-//    Π.χ. το 2013 η Πρωτομαγιά μετατέθηκε για την Τρίτη του Πάσχα
+//    Π.χ. το 2013 η Πρωτομαγιά μετατέθηκε για την Τρίτη του Πάσχα,
+//    ενώ το 2001 πήγε 2 Μαΐου
 var pmMoment = moment.tz({year:2000}, grTZ);	// dummy date
 pmMoment.year(ey.year)
 pmMoment.set("month",5 -1)	// month: 0-11
@@ -168,7 +169,7 @@ if ( pmMoment.dayOfYear() >= moment(easterMoment).subtract(6,"days").dayOfYear()
   tm = moment(easterMoment).add(2,"days")	// Τρίτη του Πάσχα
   add_one(tm.date(), tm.month(), "Πρωτομαγιά")
 } else {
-    if ( pmMoment.day() == 0 ) {  // Sunday
+    if ( pmMoment.day() == 0 ) {  // 0-6  : Sunday-Saturday
       add_one(2, 5, "Πρωτομαγιά")
     } else {
       add_one(1, 5, "Πρωτομαγιά")
