@@ -102,8 +102,8 @@ return retval;
 }
 
 
-// format ts string in local timezone (1997-01-06) as 19970105T220000Z
-function ical_timestamp(ts){
+// format date string in local timezone (1997-01-06) as 19970105T220000Z
+function ical_datestr(ts){
   var td = moment.tz(ts +" 00:00:00", grTZ);
   return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z'
 }
@@ -112,6 +112,48 @@ function ical_timestamp(ts){
 
 
 
+
+function holidays(y){
+var ty = greek_easter(y)
+var tm, tobj
+var list=[]
+
+tobj={}; tobj.d=1;  tobj.m=1;  tobj.y=y; tobj.t="Ξ ΟΟ‰Ο„ΞΏΟ‡ΟΞΏΞ½ΞΉΞ¬"; list.push(tobj)
+tobj={}; tobj.d=6;  tobj.m=1;  tobj.y=y; tobj.t="ΞΞµΞΏΟ†Ξ¬Ξ½ΞµΞΉΞ±"; list.push(tobj)
+tobj={}; tobj.d=25; tobj.m=3;  tobj.y=y; tobj.t="Ξ•ΞΈΞ½ΞΉΞΊΞ® ΞµΞΏΟΟ„Ξ®"; list.push(tobj)
+tobj={}; tobj.d=15; tobj.m=8;  tobj.y=y; tobj.t="ΞΞΏΞ―ΞΌΞ·ΟƒΞ· Ο„Ξ·Ο‚ ΞΞµΞΏΟ„ΟΞΊΞΏΟ…"; list.push(tobj)
+tobj={}; tobj.d=28; tobj.m=10; tobj.y=y; tobj.t="Ξ•ΞΈΞ½ΞΉΞΊΞ® ΞµΞΏΟΟ„Ξ® "; list.push(tobj)
+tobj={}; tobj.d=25; tobj.m=12; tobj.y=y; tobj.t="Ξ§ΟΞΉΟƒΟ„ΞΏΟΞ³ΞµΞ½Ξ½Ξ±"; list.push(tobj)
+tobj={}; tobj.d=26; tobj.m=12; tobj.y=y; tobj.t="Ξ”ΞµΟΟ„ΞµΟΞ· Ξ·ΞΌΞ­ΟΞ± Ξ§ΟΞΉΟƒΟ„ΞΏΟ…Ξ³Ξ­Ξ½Ξ½Ο‰Ξ½"; list.push(tobj)
+
+
+var easterm = moment.tz("2018-01-01 12:00:00",grTZ);
+easterm.year=ty.y
+easterm.month=ty.m-1	// month: 0-11
+easterm.date=ty.d
+
+
+tm = easterm
+tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Ξ Ξ¬ΟƒΟ‡Ξ±"; list.push(tobj)
+
+tm = easterm.subtact(48,'days")
+tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="ΞΞ±ΞΈΞ±ΟΞ¬ Ξ”ΞµΟ…Ο„Ξ­ΟΞ±"; list.push(tobj)
+//1/5 Ξ ΟΟ‰Ο„ΞΏΞΌΞ±Ξ³ΞΉΞ¬
+//    ΞΞµΟ„Ξ±Ο„Ξ―ΞΈΞµΟ„Ξ±ΞΉ ΟƒΞµ Ξ¬Ξ»Ξ»Ξ· ΞµΟΞ³Ξ¬ΟƒΞΉΞΌΞ· Ξ·ΞΌΞ­ΟΞ±,
+//    ΞµΟ†ΟΟƒΞΏΞ½ ΟƒΟ…ΞΌΟ€Ξ―Ο€Ο„ΞµΞΉ ΞΌΞµ ΞΟ…ΟΞΉΞ±ΞΊΞ®, ΞΌΞµ Ξ·ΞΌΞ­ΟΞ± Ο„Ξ·Ο‚ ΞΞµΞ³Ξ¬Ξ»Ξ·Ο‚ Ξ•Ξ²Ξ΄ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚
+//    Ξ® ΞΌΞµ Ο„Ξ· Ξ”ΞµΟ…Ο„Ξ­ΟΞ± Ο„ΞΏΟ… Ξ Ξ¬ΟƒΟ‡Ξ±
+
+tm = easterm.subtact(2,'days")
+tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="ΞΞµΞ³Ξ¬Ξ»Ξ· Ξ Ξ±ΟΞ±ΟƒΞΊΞµΟ…Ξ®"; list.push(tobj)
+
+tm = easterm.add(1,'days")
+tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Ξ”ΞµΟ…Ο„Ξ­ΟΞ± Ο„ΞΏΟ… Ξ Ξ¬ΟƒΟ‡Ξ±"; list.push(tobj)
+
+tm = easterm.add(50,'days")
+tobj={}; tobj.d=ty.d; tobj.m=ty.m; tobj.y=y; tobj.t="Ξ‘Ξ³Ξ―ΞΏΟ… Ξ Ξ½ΞµΟΞΌΞ±Ο„ΞΏΟ‚"; list.push(tobj)
+
+return list
+}
 
 
 
@@ -155,8 +197,7 @@ express()
 
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
-+ 'DTSTAMP:19970610T172345Z' + '\n'
-		+ 'DTSTAM2:' + ical_timestamp("1997-01-06") + '\n'
+		+ 'DTSTAMP:' + ical_datestr("1997-01-06") + '\n'
 		+ 'DTSTAMP:' + now.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z' + '\n'
 		+ thisYear + '\n'
 		+ req.query.from + '\n'
@@ -172,27 +213,9 @@ express()
 
 		+ vcal_footer + '\n'
 		+ JSON.stringify(greek_easter(req.query.from)) + '\n'
+		+ JSON.stringify(holidays(req.query.from)) + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
 
 
-
-/*
-1/1 Πρωτοχρονιά
-6/1 Θεοφάνεια
-25/3 Εθνική εορτή
-1/5 Μετατίθεται σε άλλη εργάσιμη ημέρα,
-    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
-    ή με τη Δευτέρα του Πάσχα
-15/8 Κοίμηση της Θεοτόκου
-28/10 Εθνική εορτή 
-25/12 Χριστούγεννα
-26/12 Δεύτερη ημέρα Χριστουγέννων
-
-Πάσχα-48 	Καθαρά Δευτέρα
-Πάσχα-2		Μεγάλη Παρασκευή
-Πάσχα		Πάσχα
-Πάσχα+1  	Δευτέρα του Πάσχα
-Πάσχα+50	Αγίου Πνεύματος
-*/
