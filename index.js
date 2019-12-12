@@ -15,7 +15,6 @@ const moment = require('moment-timezone');	// date manipulation library
 const grTZ = 'Europe/Athens';			// timezone in Greece
 
 
-
 /* https://tools.ietf.org/html/rfc5545
 
 LOCATION;LANGUAGE=el:Ελλάς
@@ -206,6 +205,9 @@ express()
 	var now = moment().tz(grTZ);
 	const thisYear=now.format('YYYY');
 
+	const fromYear = Number(req.query.from)
+	const   toYear = Number(req.query.to)
+
   	res.send(''
 		+ vcal_header + '\n'
 
@@ -228,6 +230,7 @@ express()
 		+ vcal_footer + '\n'
 		+ "easter: " + JSON.stringify(greek_easter(req.query.from)) + '\n'
 		+ JSON.stringify(holidays(req.query.from)) + '\n'
+		+ fromYear + " - " + toYear + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
