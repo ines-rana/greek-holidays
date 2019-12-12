@@ -237,8 +237,8 @@ express()
 
 	function date2event(dobj){
 		var o={};o["year"]=dobj.y; o["month"]=dobj.m; o["date"]=dobj.d;
-		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
-		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
+		var d1 = moment.tz(o,grTZ).tz('UTC').format("YYYY-MM-DD") 
+		var d2 = moment.tz(o,grTZ).tz('UTC').add(1,'day').format("YYYY-MM-DD") 
 		return ical_datestr(d1)+" "+ical_datestr(d2)+" "+dobj.t
 	}
 
