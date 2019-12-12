@@ -91,7 +91,10 @@ if (y<1583) { e=0 }
 
 G=y%19
 I=(19*G+15)%30
-J= Number(y+ (Math.floor(y/4)) +I) % 7
+J= (y+ (Math.floor(y/4)) +I)
+console.log ("old J", J)
+J= J % 7
+console.log ("new J", J)
 console.log ("y", y)
 console.log ("Math.floor(y/4)", Math.floor(y/4))
 console.log ("I", I)
