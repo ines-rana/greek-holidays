@@ -79,6 +79,7 @@ function greek_easter(y){
 // η καθολική Ευρώπη το 1582
 if (y<1923 || y>4099){return("year must be between 1923 and 4099");}
 
+var retval = {};
 var e, y2, G, I, J, L, p, d, m;
 
 e=10
@@ -96,7 +97,6 @@ p=L+e
 d=1+(p+27+Math.floor((p+6)/40))%31
 m=3+Math.floor((p+26)/30)
 
-retval = {};
 retval["year"]=y; retval["month"]=m; retval["day"]=d;
 return retval;
 }
