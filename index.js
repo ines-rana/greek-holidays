@@ -103,7 +103,6 @@ return retval;
 
 // format date string in local timezone (1997-01-06) as 19970105T220000Z
 function ical_datestr(ts){
-console.log("ical_datestr", ts)
   var td = moment.tz(ts +" 00:00:00", grTZ);
   return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z'
 }
@@ -185,6 +184,16 @@ return list
 
 
 
+const vcal_event = (function () {/*  
+BEGIN:VEVENT
+UID:19970610T172345Z-AF23B2@example.com
+DTSTAMP:19970610T172345Z
+DTSTART:19970714T170000Z
+DTEND:19970715T040000Z
+SUMMARY:summary
+END:VEVENT
+END:VCALENDAR
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
 const vcal_header = (function () {/*  
@@ -241,7 +250,10 @@ express()
 		    o["date"]=dobj.d;
 		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
 		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
-		return ical_datestr(d1)+" "+ical_datestr(d2)+" "+dobj.t
+		return 
+			d1.format("DD/MM/YY")+" "+dobj.t+"\n" +
+		        vcal_event.replace("summary", dobj.t)
+	//+" "+ical_datestr(d2)+" "+dobj.t
 	}
 
 
