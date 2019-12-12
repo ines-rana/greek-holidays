@@ -120,13 +120,13 @@ var list = new Array();
 
 tobj.y=y
 
-tobj.d=1;  tobj.m=1;  tobj.t="Πρωτοχρονιά"; list.push(tobj)
-tobj.d=6;  tobj.m=1;  tobj.t="Θεοφάνεια"; list.push(tobj)
-tobj.d=25; tobj.m=3;  tobj.t="Εθνική εορτή"; list.push(tobj)
-tobj.d=15; tobj.m=8;  tobj.t="Κοίμηση της Θεοτόκου"; list.push(tobj)
-tobj.d=28; tobj.m=10; tobj.t="Εθνική εορτή "; list.push(tobj)
-tobj.d=25; tobj.m=12; tobj.t="Χριστούγεννα"; list.push(tobj)
-tobj.d=26; tobj.m=12; tobj.t="Δεύτερη ημέρα Χριστουγέννων"; list.push(tobj)
+tobj={}; tobj.d=1;  tobj.m=1;  tobj.t="Πρωτοχρονιά"; list.push(tobj)
+tobj={}; tobj.d=6;  tobj.m=1;  tobj.t="Θεοφάνεια"; list.push(tobj)
+tobj={}; tobj.d=25; tobj.m=3;  tobj.t="Εθνική εορτή"; list.push(tobj)
+tobj={}; tobj.d=15; tobj.m=8;  tobj.t="Κοίμηση της Θεοτόκου"; list.push(tobj)
+tobj={}; tobj.d=28; tobj.m=10; tobj.t="Εθνική εορτή "; list.push(tobj)
+tobj={}; tobj.d=25; tobj.m=12; tobj.t="Χριστούγεννα"; list.push(tobj)
+tobj={}; tobj.d=26; tobj.m=12; tobj.t="Δεύτερη ημέρα Χριστουγέννων"; list.push(tobj)
 
 
 var easterMoment = moment.tz("2018-01-01 12:00:00",grTZ);
@@ -139,23 +139,23 @@ console.log("15", easterMoment.format());
 
 
 tm = moment(easterMoment)	// clone moment
-tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Πάσχα"; list.push(tobj)
+tobj={}; tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Πάσχα"; list.push(tobj)
 console.log("00", tm.format());
 
 tm = moment(easterMoment).subtract(48,"days")
-tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
+tobj={}; tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Καθαρά Δευτέρα"; list.push(tobj)
 console.log("-48", tm.format());
 
 tm = moment(easterMoment).subtract(2,"days")
-tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Μεγάλη Παρασκευή"; list.push(tobj)
+tobj={}; tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Μεγάλη Παρασκευή"; list.push(tobj)
 console.log("-2", tm.format());
 
 tm = moment(easterMoment).add(1,"days")
-tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
+tobj={}; tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Δευτέρα του Πάσχα"; list.push(tobj)
 console.log("+1", tm.format());
 
 tm = moment(easterMoment).add(50,"days")
-tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Αγίου Πνεύματος"; list.push(tobj)
+tobj={}; tobj.d=tm.date(); tobj.m=tm.month(); tobj.t="Αγίου Πνεύματος"; list.push(tobj)
 console.log("50", tm.format());
 
 
