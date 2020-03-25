@@ -1,15 +1,15 @@
 // produce a list of official greek holidays in iCalendar (RFC 5545) format
 // Content-Type: text/calendar; charset="UTF-8"
 
-//	Î‘Î½ Ï‡ÏÎµÎ¹Î¬Î¶ÎµÏƒÎ±Î¹ Î¼Î¹Î± Ï€Î·Î³Î® Î±ÏÎ³Î¹ÏŽÎ½ ÏƒÎµ Î¼Î¿ÏÏ†Î® iCalendar Ï‡ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¯Î·ÏƒÎµ Ï„Î¿
+//	Αν χρειάζεσαι μια πηγή αργιών σε μορφή iCalendar χρησιμοποίησε το
 //	 
 //	https://greek-holidays.herokuapp.com
-//	      (Î±ÏÎ³Î¯ÎµÏ‚ Î³Î¹Î± Ï„Î¿ Ï„ÏÎ­Ï‡Î¿Î½ Î­Ï„Î¿Ï‚ ÎºÎ±Î¹ 5 Î­Ï„Î· Î¼Ï€ÏÎ¿ÏƒÏ„Î¬/Ï€Î¯ÏƒÏ‰)
-//			Î®
+//	      (αργίες για το τρέχον έτος και 5 έτη μπροστά/πίσω)
+//			ή
 //	https://greek-holidays.herokuapp.com?from=2017&to=2021
-//	      (Î±ÏÎ³Î¯ÎµÏ‚ Î³Î¹Î± Ï„Î± ÎºÎ±Î¸Î¿ÏÎ¹Î¶ÏŒÎ¼ÎµÎ½Î± Î­Ï„Î·)
+//	      (αργίες για τα καθοριζόμενα έτη)
 //	 
-//	ÎœÏ€Î¿ÏÎµÎ¯Ï‚ Î½Î± Ï„Î¹Ï‚ Î´ÎµÎ¹Ï‚ ÎºÎ±Î¹ ÏƒÎµ Î­Î½Î± (Î¬Î´ÎµÎ¹Î¿) Î´Ï…Î½Î±Î¼Î¹ÎºÏŒ Î·Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿
+//	Μπορείς να τις δεις και σε ένα (άδειο) δυναμικό ημερολόγιο
 //	
 //	https://i-cal.herokuapp.com/calendar.html
 
@@ -34,10 +34,10 @@ const uuidv1 = require('uuid/v1');		// uuidv1();
 
 
 
-// Ï…Ï€Î¿Î»Î¿Î³Î¹ÏƒÎ¼ÏŒÏ‚ Î·Î¼Î­ÏÎ±Ï‚/Î¼Î®Î½Î± Ï„Î¿Ï… ÎµÎ»Î»Î·Î½Î¿ÏÎ¸Î¿Î´ÏŒÎ¾Î¿Ï… Î Î¬ÏƒÏ‡Î± Î³Î¹Î± Ï„Î¿ Î­Ï„Î¿Ï‚ y
+// υπολογισμός ημέρας/μήνα του ελληνορθοδόξου Πάσχα για το έτος y
 function greek_easter(y){
-// Î· Î•Î»Î»Î¬Î´Î± Ï…Î¹Î¿Î¸Î­Ï„Î·ÏƒÎµ Ï„Î¿ Î³ÏÎ·Î³Î¿ÏÎ¹Î±Î½ÏŒ Î·Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿ Ï„Î¿ 1923,
-// Î· ÎºÎ±Î¸Î¿Î»Î¹ÎºÎ® Î•Ï…ÏÏŽÏ€Î· Ï„Î¿ 1582
+// η Ελλάδα υιοθέτησε το γρηγοριανό ημερολόγιο το 1923,
+// η καθολική Ευρώπη το 1582
 if (y<1923 || y>4099){return("year must be between 1923 and 4099");}
 
 var retval = {};
@@ -87,13 +87,13 @@ function add_one(ad, am, at){
   var tobj={}; tobj.y=y; tobj.m=am; tobj.d=ad; tobj.t=at; list.push(tobj)
 }
 
-add_one(1, 1, "Î ÏÏ‰Ï„Î¿Ï‡ÏÎ¿Î½Î¹Î¬");
-add_one(6, 1, "Î˜ÎµÎ¿Ï†Î¬Î½ÎµÎ¹Î±");
-add_one(25, 3, "Î•Î¸Î½Î¹ÎºÎ® ÎµÎ¿ÏÏ„Î®")
-add_one(15, 8, "ÎšÎ¿Î¯Î¼Î·ÏƒÎ· Ï„Î·Ï‚ Î˜ÎµÎ¿Ï„ÏŒÎºÎ¿Ï…")
-add_one(28, 10, "Î•Î¸Î½Î¹ÎºÎ® ÎµÎ¿ÏÏ„Î® ")
-add_one(25, 12, "Î§ÏÎ¹ÏƒÏ„Î¿ÏÎ³ÎµÎ½Î½Î±")
-add_one(26, 12, "Î”ÎµÏÏ„ÎµÏÎ· Î·Î¼Î­ÏÎ± Î§ÏÎ¹ÏƒÏ„Î¿Ï…Î³Î­Î½Î½Ï‰Î½")
+add_one(1, 1, "Πρωτοχρονιά");
+add_one(6, 1, "Θεοφάνεια");
+add_one(25, 3, "Εθνική εορτή")
+add_one(15, 8, "Κοίμηση της Θεοτόκου")
+add_one(28, 10, "Εθνική εορτή ")
+add_one(25, 12, "Χριστούγεννα")
+add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
 
 
 var easterMoment = moment.tz({year:2000}, grTZ);	// dummy date
@@ -103,28 +103,28 @@ easterMoment.set("date",ey.date)
 
 
 tm = moment(easterMoment)	// clone moment
-add_one(tm.date(), tm.month()+1, "Î Î¬ÏƒÏ‡Î±")
+add_one(tm.date(), tm.month()+1, "Πάσχα")
 
 tm = moment(easterMoment).subtract(48,"days")
-add_one(tm.date(), tm.month()+1, "ÎšÎ±Î¸Î±ÏÎ¬ Î”ÎµÏ…Ï„Î­ÏÎ±")
+add_one(tm.date(), tm.month()+1, "Καθαρά Δευτέρα")
 
 tm = moment(easterMoment).subtract(2,"days")
-add_one(tm.date(), tm.month()+1, "ÎœÎµÎ³Î¬Î»Î· Î Î±ÏÎ±ÏƒÎºÎµÏ…Î®")
+add_one(tm.date(), tm.month()+1, "Μεγάλη Παρασκευή")
 
 tm = moment(easterMoment).add(1,"days")
-add_one(tm.date(), tm.month()+1, "Î”ÎµÏ…Ï„Î­ÏÎ± Ï„Î¿Ï… Î Î¬ÏƒÏ‡Î±")
+add_one(tm.date(), tm.month()+1, "Δευτέρα του Πάσχα")
 
 tm = moment(easterMoment).add(50,"days")
-add_one(tm.date(), tm.month()+1, "Î‘Î³Î¯Î¿Ï… Î Î½ÎµÏÎ¼Î±Ï„Î¿Ï‚")
+add_one(tm.date(), tm.month()+1, "Αγίου Πνεύματος")
 
 
 
-//1/5 Î ÏÏ‰Ï„Î¿Î¼Î±Î³Î¹Î¬
-//    ÎœÎµÏ„Î±Ï„Î¯Î¸ÎµÏ„Î±Î¹ ÏƒÎµ Î¬Î»Î»Î· ÎµÏÎ³Î¬ÏƒÎ¹Î¼Î· Î·Î¼Î­ÏÎ±,
-//    ÎµÏ†ÏŒÏƒÎ¿Î½ ÏƒÏ…Î¼Ï€Î¯Ï€Ï„ÎµÎ¹ Î¼Îµ ÎšÏ…ÏÎ¹Î±ÎºÎ®, Î¼Îµ Î·Î¼Î­ÏÎ± Ï„Î·Ï‚ ÎœÎµÎ³Î¬Î»Î·Ï‚ Î•Î²Î´Î¿Î¼Î¬Î´Î±Ï‚
-//    Î® Î¼Îµ Ï„Î· Î”ÎµÏ…Ï„Î­ÏÎ± Ï„Î¿Ï… Î Î¬ÏƒÏ‡Î±
-//    Î .Ï‡. Ï„Î¿ 2013 Î· Î ÏÏ‰Ï„Î¿Î¼Î±Î³Î¹Î¬ Î¼ÎµÏ„Î±Ï„Î­Î¸Î·ÎºÎµ Î³Î¹Î± Ï„Î·Î½ Î¤ÏÎ¯Ï„Î· Ï„Î¿Ï… Î Î¬ÏƒÏ‡Î±,
-//    ÎµÎ½ÏŽ Ï„Î¿ 2001 Ï€Î®Î³Îµ 2 ÎœÎ±ÎÎ¿Ï…
+//1/5 Πρωτομαγιά
+//    Μετατίθεται σε άλλη εργάσιμη ημέρα,
+//    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
+//    ή με τη Δευτέρα του Πάσχα
+//    Π.χ. το 2013 η Πρωτομαγιά μετατέθηκε για την Τρίτη του Πάσχα,
+//    ενώ το 2001 πήγε 2 Μαΐου
 var pmMoment = moment.tz({year:2000}, grTZ);	// dummy date
 pmMoment.year(ey.year)
 pmMoment.set("month",5 -1)	// month: 0-11
@@ -132,13 +132,13 @@ pmMoment.set("date",1)
 if ( pmMoment.dayOfYear() >= moment(easterMoment).subtract(6,"days").dayOfYear()
      && pmMoment.dayOfYear() <= moment(easterMoment).add(1,"days").dayOfYear() )
 {
-  tm = moment(easterMoment).add(2,"days")	// Î¤ÏÎ¯Ï„Î· Ï„Î¿Ï… Î Î¬ÏƒÏ‡Î±
-  add_one(tm.date(), tm.month()+1, "Î ÏÏ‰Ï„Î¿Î¼Î±Î³Î¹Î¬")
+  tm = moment(easterMoment).add(2,"days")	// Τρίτη του Πάσχα
+  add_one(tm.date(), tm.month()+1, "Πρωτομαγιά")
 } else {
     if ( pmMoment.day() == 0 ) {  // 0-6  : Sunday-Saturday
-      add_one(2, 5, "Î ÏÏ‰Ï„Î¿Î¼Î±Î³Î¹Î¬")
+      add_one(2, 5, "Πρωτομαγιά")
     } else {
-      add_one(1, 5, "Î ÏÏ‰Ï„Î¿Î¼Î±Î³Î¹Î¬")
+      add_one(1, 5, "Πρωτομαγιά")
     }
 }
 
@@ -155,13 +155,13 @@ const vcal_header = (function () {/*BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
-X-WR-CALNAME;LANGUAGE=el:Î•Î»Î»Î·Î½Î¹ÎºÎ­Ï‚ Î±ÏÎ³Î¯ÎµÏ‚
-X-WR-CALDESC;LANGUAGE=el:Î•Ï€Î¯ÏƒÎ·Î¼ÎµÏ‚ Î±ÏÎ³Î¯ÎµÏ‚ ÏƒÏ„Î·Î½ Î•Î»Î»Î¬Î´Î±
+X-WR-CALNAME;LANGUAGE=el:Ελληνικές αργίες
+X-WR-CALDESC;LANGUAGE=el:Επίσημες αργίες στην Ελλάδα
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
 X-PUBLISHED-TTL:PT48H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-LOCATION;LANGUAGE=el:Î•Î»Î»Î¬Ï‚
+LOCATION;LANGUAGE=el:Ελλάς
 BEGIN:VTIMEZONE
 TZID:Europe/Athens
 TZURL:http://tzurl.org/zoneinfo-outlook/Europe/Athens
@@ -293,7 +293,7 @@ express()
 
 Samples:
 
-LOCATION;LANGUAGE=el:ÅëëÜò
+LOCATION;LANGUAGE=el:�����
        DTSTART;TZID=America/New_York:19980119T020000
        DTEND;TZID=America/New_York:19980119T030000
 
@@ -333,10 +333,10 @@ URL:https://www.officeholidays.com/holidays/greece/international-new-years-day
 DTSTART;VALUE=DATE:20190101
 DTEND;VALUE=DATE:20190102
 DTSTAMP:20080101T000000Z
-LOCATION;LANGUAGE=el:Î•Î»Î»Î¬Ï‚
+LOCATION;LANGUAGE=el:Ελλάς
 PRIORITY:5
 SEQUENCE:0
-SUMMARY;LANGUAGE=el:Î ÏÏ‰Ï„Î¿Ï‡ÏÎ¿Î½Î¹Î¬
+SUMMARY;LANGUAGE=el:Πρωτοχρονιά
 TRANSP:OPAQUE
 X-MICROSOFT-CDO-BUSYSTATUS:BUSY
 X-MICROSOFT-CDO-IMPORTANCE:1
@@ -347,7 +347,6 @@ X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
 X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE
 X-MS-OLK-CONFTYPE:0
 END:VEVENT
-
 
 
 
