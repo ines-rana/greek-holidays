@@ -224,8 +224,7 @@ DTEND;VALUE=DATE:dtend
 COMMENT;LANGUAGE=el:comment
 UID:uid
 DTSTAMP:dtstamp
-END:VEVENT
-*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+END:VEVENT*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 const vcal_footer = '\nEND:VCALENDAR\r';
 
