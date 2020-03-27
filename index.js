@@ -257,6 +257,12 @@ express()
             '; charset=utf-8'
         );
 
+console.log (
+'Content-Type',
+            'text/' +
+            (asList == 1) ? 'plain' : 'calendar' +
+            '; charset=utf-8'
+)
         var fromYear = Number(req.query.from)
         var toYear = Number(req.query.to)
         if (isNaN(fromYear) && isNaN(toYear)) {
