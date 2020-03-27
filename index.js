@@ -1,18 +1,23 @@
 // produce a list of official greek holidays in iCalendar (RFC 5545) format
 // Content-Type: text/calendar; charset="UTF-8"
 
-//	Ξ‘Ξ½ Ο‡ΟΞµΞΉΞ¬Ξ¶ΞµΟƒΞ±ΞΉ ΞΌΞΉΞ± Ο€Ξ·Ξ³Ξ® Ξ±ΟΞ³ΞΉΟΞ½ ΟƒΞµ ΞΌΞΏΟΟ†Ξ® iCalendar Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞ―Ξ·ΟƒΞµ Ο„ΞΏ
+//	Αν χρειάζεσαι μια πηγή αργιών σε μορφή iCalendar χρησιμοποίησε το
 //	 
 //	https://greek-holidays.herokuapp.com
-//	      (Ξ±ΟΞ³Ξ―ΞµΟ‚ Ξ³ΞΉΞ± Ο„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ξ­Ο„ΞΏΟ‚ ΞΊΞ±ΞΉ 5 Ξ­Ο„Ξ· ΞΌΟ€ΟΞΏΟƒΟ„Ξ¬/Ο€Ξ―ΟƒΟ‰)
-//			Ξ®
+//	      (αργίες για το τρέχον έτος και 5 έτη μπροστά/πίσω)
+//			ή
 //	https://greek-holidays.herokuapp.com?from=2017&to=2021
-//	      (Ξ±ΟΞ³Ξ―ΞµΟ‚ Ξ³ΞΉΞ± Ο„Ξ± ΞΊΞ±ΞΈΞΏΟΞΉΞ¶ΟΞΌΞµΞ½Ξ± Ξ­Ο„Ξ·)
+//	      (αργίες για τα καθοριζόμενα έτη)
 //	 
-//	ΞΟ€ΞΏΟΞµΞ―Ο‚ Ξ½Ξ± Ο„ΞΉΟ‚ Ξ΄ΞµΞΉΟ‚ ΞΊΞ±ΞΉ ΟƒΞµ Ξ­Ξ½Ξ± (Ξ¬Ξ΄ΞµΞΉΞΏ) Ξ΄Ο…Ξ½Ξ±ΞΌΞΉΞΊΟ Ξ·ΞΌΞµΟΞΏΞ»ΟΞ³ΞΉΞΏ
+//	Μπορείς να τις δεις και σε ένα (άδειο) δυναμικό ημερολόγιο
 //	
 //	https://i-cal.herokuapp.com/calendar.html
 
+
+//	Αν χρειάζεσαι μια πηγή αργιών σε μορφή λίστας
+//	πρόσθεσε την επιλογή asList=1
+//
+//	https://greek-holidays.herokuapp.com?asList=1[&...]
 
 
 
@@ -227,6 +232,9 @@ express()
 	var now = moment().tz(grTZ);
 	const thisYear=Number(now.format('YYYY'));
 
+	var fromYear = Number(req.query.asList)
+	if (isNaN(asList)) { asList = 0; }
+
 	var fromYear = Number(req.query.from)
 	var   toYear = Number(req.query.to)
 	if (isNaN(fromYear) && isNaN(toYear)) {
@@ -266,11 +274,24 @@ express()
 		)
 	}
 
+	function date2list(dobj){
+		var o={}
+		    o["year"]=dobj.y;
+		    o["month"]=dobj.m -1; //month: 0-11
+		    o["date"]=dobj.d;
+		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
+		return ( d1 + '\t' + dobj.t + '\r' )
+	}
 
-  	res.send(''
-		+ vcal_header
-		+ hList.map(date2event).join().replace(/,/g,"\n") 
-		+ vcal_footer + '\n'
+
+
+  	res.send(
+		(asList == 1)
+		? hList.map(date2list).join().replace(/,/g,"\n")
+		: ''
+		  + vcal_header
+		  + hList.map(date2event).join().replace(/,/g,"\n") 
+		  + vcal_footer + '\n'
         );
   })
   .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
