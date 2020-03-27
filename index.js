@@ -225,8 +225,7 @@ COMMENT;LANGUAGE=el:comment
 UID:uid
 DTSTAMP:dtstamp
 END:VEVENT
-*/
-}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 const vcal_footer = '\nEND:VCALENDAR\r';
 
