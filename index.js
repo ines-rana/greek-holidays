@@ -18,153 +18,167 @@
 //	πρόσθεσε την επιλογή asList=1
 //
 //	https://greek-holidays.herokuapp.com?asList=1[&...]
-
-
-
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
 
-const moment = require('moment-timezone');	// date manipulation library
-      // moment.tz(..., String)     create a moment with a time zone
-      // moment().tz(String)        convert the time zone of an existing moment
-      // DD/MM/YYYY  D/M/Y          format date with/without zero-padding
-      // HH:mm:ss                   format time with zero-padding
+const moment = require('moment-timezone'); // date manipulation library
+// moment.tz(..., String)     create a moment with a time zone
+// moment().tz(String)        convert the time zone of an existing moment
+// DD/MM/YYYY  D/M/Y          format date with/without zero-padding
+// HH:mm:ss                   format time with zero-padding
 
-const grTZ = 'Europe/Athens';			// timezone in Greece
+const grTZ = 'Europe/Athens'; // timezone in Greece
 
 
-const uuidv1 = require('uuid/v1');		// uuidv1();
+const uuidv1 = require('uuid/v1'); // uuidv1();
 
 
 
 // υπολογισμός ημέρας/μήνα του ελληνορθοδόξου Πάσχα για το έτος y
-function greek_easter(y){
-// η Ελλάδα υιοθέτησε το γρηγοριανό ημερολόγιο το 1923,
-// η καθολική Ευρώπη το 1582
-if (y<1923 || y>4099){return("year must be between 1923 and 4099");}
+function greek_easter(y) {
+    // η Ελλάδα υιοθέτησε το γρηγοριανό ημερολόγιο το 1923,
+    // η καθολική Ευρώπη το 1582
+    if (y < 1923 || y > 4099) {
+        return ("year must be between 1923 and 4099");
+    }
 
-var retval = {};
-var e=0, y2=0, G=0, I=0, J=0, L=0, p=0, d=0, m=0;
+    var retval = {};
+    var e = 0,
+        y2 = 0,
+        G = 0,
+        I = 0,
+        J = 0,
+        L = 0,
+        p = 0,
+        d = 0,
+        m = 0;
 
-e=10
-if (y>1600) {
-  y2=Math.floor(y/100)
-  e=10+y2-16-Math.floor((y2-16)/4)
+    e = 10
+    if (y > 1600) {
+        y2 = Math.floor(y / 100)
+        e = 10 + y2 - 16 - Math.floor((y2 - 16) / 4)
+    }
+    if (y < 1583) {
+        e = 0
+    }
+
+    G = y % 19
+    I = (19 * G + 15) % 30
+    J = (y + (Math.floor(y / 4)) + I) % 7
+    L = I - J
+    p = L + e
+    d = 1 + (p + 27 + Math.floor((p + 6) / 40)) % 31
+    m = 3 + Math.floor((p + 26) / 30)
+
+    retval["year"] = y;
+    retval["month"] = m;
+    retval["date"] = d;
+    return retval;
 }
-if (y<1583) { e=0 }
-
-G=y%19
-I= (19*G+15)%30
-J= (y+ (Math.floor(y/4)) +I) % 7
-L=I-J
-p=L+e
-d=1+(p+27+Math.floor((p+6)/40))%31
-m=3+Math.floor((p+26)/30)
-
-retval["year"]=y; retval["month"]=m; retval["date"]=d;
-return retval;
-}
-
 
 
 
 
 // format datetime string in local timezone (1997-01-06) as 19970105T220000Z
-function ical_datetimestr(ts){
-  var td = moment.tz(ts +" 00:00:00", grTZ);
-  return td.tz("UTC").format('YYYYMMDDTHHmmss')+'Z';
+function ical_datetimestr(ts) {
+    var td = moment.tz(ts + " 00:00:00", grTZ);
+    return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z';
 }
 
 
 
 
 // format date string in local timezone (1997-01-06) as 19970106
-function ical_datestr(ts){
-  var td = moment.tz(ts +" 00:00:00", grTZ);
-  return td.tz("Europe/Athens").format('YYYYMMDD')	// no time component
+function ical_datestr(ts) {
+    var td = moment.tz(ts + " 00:00:00", grTZ);
+    return td.tz("Europe/Athens").format('YYYYMMDD') // no time component
 }
 
 
 
 
+function holidays(y) {
+    var ey = greek_easter(Number(y))
+    var tm, tobj = {}
+    var list = new Array();
 
-
-function holidays(y){
-var ey = greek_easter(Number(y))
-var tm, tobj={}
-var list = new Array();
-
-function add_one(ad, am, at){
-  var tobj={}; tobj.y=y; tobj.m=am; tobj.d=ad; tobj.t=at; list.push(tobj)
-}
-
-add_one(1, 1, "Πρωτοχρονιά");
-add_one(6, 1, "Θεοφάνεια");
-add_one(25, 3, "Εθνική εορτή")
-add_one(15, 8, "Κοίμηση της Θεοτόκου")
-add_one(28, 10, "Εθνική εορτή ")
-add_one(25, 12, "Χριστούγεννα")
-add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
-
-
-var easterMoment = moment.tz({year:2000}, grTZ);	// dummy date
-easterMoment.year(ey.year)
-easterMoment.set("month",ey.month-1)	// month: 0-11
-easterMoment.set("date",ey.date)
-
-
-tm = moment(easterMoment)	// clone moment
-add_one(tm.date(), tm.month()+1, "Πάσχα")
-
-tm = moment(easterMoment).subtract(48,"days")
-add_one(tm.date(), tm.month()+1, "Καθαρά Δευτέρα")
-
-tm = moment(easterMoment).subtract(2,"days")
-add_one(tm.date(), tm.month()+1, "Μεγάλη Παρασκευή")
-
-tm = moment(easterMoment).add(1,"days")
-add_one(tm.date(), tm.month()+1, "Δευτέρα του Πάσχα")
-
-tm = moment(easterMoment).add(50,"days")
-add_one(tm.date(), tm.month()+1, "Αγίου Πνεύματος")
-
-
-
-//1/5 Πρωτομαγιά
-//    Μετατίθεται σε άλλη εργάσιμη ημέρα,
-//    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
-//    ή με τη Δευτέρα του Πάσχα
-//    Π.χ. το 2013 η Πρωτομαγιά μετατέθηκε για την Τρίτη του Πάσχα,
-//    ενώ το 2001 πήγε 2 Μαΐου
-var pmMoment = moment.tz({year:2000}, grTZ);	// dummy date
-pmMoment.year(ey.year)
-pmMoment.set("month",5 -1)	// month: 0-11
-pmMoment.set("date",1)
-if ( pmMoment.dayOfYear() >= moment(easterMoment).subtract(6,"days").dayOfYear()
-     && pmMoment.dayOfYear() <= moment(easterMoment).add(1,"days").dayOfYear() )
-{
-  tm = moment(easterMoment).add(2,"days")	// Τρίτη του Πάσχα
-  add_one(tm.date(), tm.month()+1, "Πρωτομαγιά")
-} else {
-    if ( pmMoment.day() == 0 ) {  // 0-6  : Sunday-Saturday
-      add_one(2, 5, "Πρωτομαγιά")
-    } else {
-      add_one(1, 5, "Πρωτομαγιά")
+    function add_one(ad, am, at) {
+        var tobj = {};
+        tobj.y = y;
+        tobj.m = am;
+        tobj.d = ad;
+        tobj.t = at;
+        list.push(tobj)
     }
+
+    add_one(1, 1, "Πρωτοχρονιά");
+    add_one(6, 1, "Θεοφάνεια");
+    add_one(25, 3, "Εθνική εορτή")
+    add_one(15, 8, "Κοίμηση της Θεοτόκου")
+    add_one(28, 10, "Εθνική εορτή ")
+    add_one(25, 12, "Χριστούγεννα")
+    add_one(26, 12, "Δεύτερη ημέρα Χριστουγέννων")
+
+
+    var easterMoment = moment.tz({
+        year: 2000
+    }, grTZ); // dummy date
+    easterMoment.year(ey.year)
+    easterMoment.set("month", ey.month - 1) // month: 0-11
+    easterMoment.set("date", ey.date)
+
+
+    tm = moment(easterMoment) // clone moment
+    add_one(tm.date(), tm.month() + 1, "Πάσχα")
+
+    tm = moment(easterMoment).subtract(48, "days")
+    add_one(tm.date(), tm.month() + 1, "Καθαρά Δευτέρα")
+
+    tm = moment(easterMoment).subtract(2, "days")
+    add_one(tm.date(), tm.month() + 1, "Μεγάλη Παρασκευή")
+
+    tm = moment(easterMoment).add(1, "days")
+    add_one(tm.date(), tm.month() + 1, "Δευτέρα του Πάσχα")
+
+    tm = moment(easterMoment).add(50, "days")
+    add_one(tm.date(), tm.month() + 1, "Αγίου Πνεύματος")
+
+
+
+    //1/5 Πρωτομαγιά
+    //    Μετατίθεται σε άλλη εργάσιμη ημέρα,
+    //    εφόσον συμπίπτει με Κυριακή, με ημέρα της Μεγάλης Εβδομάδας
+    //    ή με τη Δευτέρα του Πάσχα
+    //    Π.χ. το 2013 η Πρωτομαγιά μετατέθηκε για την Τρίτη του Πάσχα,
+    //    ενώ το 2001 πήγε 2 Μαΐου
+    var pmMoment = moment.tz({
+        year: 2000
+    }, grTZ); // dummy date
+    pmMoment.year(ey.year)
+    pmMoment.set("month", 5 - 1) // month: 0-11
+    pmMoment.set("date", 1)
+    if (pmMoment.dayOfYear() >= moment(easterMoment).subtract(6, "days").dayOfYear() &&
+        pmMoment.dayOfYear() <= moment(easterMoment).add(1, "days").dayOfYear()) {
+        tm = moment(easterMoment).add(2, "days") // Τρίτη του Πάσχα
+        add_one(tm.date(), tm.month() + 1, "Πρωτομαγιά")
+    } else {
+        if (pmMoment.day() == 0) { // 0-6  : Sunday-Saturday
+            add_one(2, 5, "Πρωτομαγιά")
+        } else {
+            add_one(1, 5, "Πρωτομαγιά")
+        }
+    }
+
+
+    return list
 }
 
 
-return list
-}
 
 
-
-
-
-
-const vcal_header = (function () {/*BEGIN:VCALENDAR
+const vcal_header = (function() {/*BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
@@ -175,7 +189,8 @@ REFRESH-INTERVAL;VALUE=DURATION:PT24H
 X-PUBLISHED-TTL:PT24H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+*/
+}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
 // no need for VTIMEZONE definition
@@ -202,7 +217,7 @@ END:STANDARD
 END:TIMEZONE
 */
 
-const vcal_event = (function () {/*BEGIN:VEVENT
+const vcal_event = (function() {/*BEGIN:VEVENT
 DESCRIPTION;LANGUAGE=el:description
 SUMMARY;LANGUAGE=el:summary
 DTSTART;VALUE=DATE:dtstart
@@ -210,7 +225,9 @@ DTEND;VALUE=DATE:dtend
 COMMENT;LANGUAGE=el:comment
 UID:uid
 DTSTAMP:dtstamp
-END:VEVENT*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+END:VEVENT
+*/
+}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 const vcal_footer = '\nEND:VCALENDAR\r';
 
@@ -218,83 +235,97 @@ const vcal_footer = '\nEND:VCALENDAR\r';
 
 
 express()
-  .disable('x-powered-by')
-  //.use(express.static(path.join(__dirname, 'public')))
-  //.set('views', path.join(__dirname, 'views'))
-  //.set('view engine', 'ejs')
-  .get('/', (req, res, next) => {
-	res.append('Content-Type', 'text/calendar; charset=utf-8');
-		// allow XHR calls (CORS)
-	res.append('Access-Control-Allow-Origin', ['*']);
-	res.append('Access-Control-Allow-Methods', 'GET');
-	res.append('Access-Control-Allow-Headers', 'Content-Type');
+    .disable('x-powered-by')
+    //.use(express.static(path.join(__dirname, 'public')))
+    //.set('views', path.join(__dirname, 'views'))
+    //.set('view engine', 'ejs')
+    .get('/', (req, res, next) => {
+        // allow XHR calls (CORS)
+        res.append('Access-Control-Allow-Origin', ['*']);
+        res.append('Access-Control-Allow-Methods', 'GET');
+        res.append('Access-Control-Allow-Headers', 'Content-Type');
 
-	var now = moment().tz(grTZ);
-	const thisYear=Number(now.format('YYYY'));
+        var now = moment().tz(grTZ);
+        const thisYear = Number(now.format('YYYY'));
 
-	var fromYear = Number(req.query.asList)
-	if (isNaN(asList)) { asList = 0; }
+        var fromYear = Number(req.query.asList)
+        if (isNaN(asList)) {
+            asList = 0;
+        }
 
-	var fromYear = Number(req.query.from)
-	var   toYear = Number(req.query.to)
-	if (isNaN(fromYear) && isNaN(toYear)) {
-		fromYear=thisYear - 5; toYear=thisYear + 5
-	} else {
-		if (isNaN(toYear)) { toYear = thisYear }
-		if (isNaN(fromYear)) { fromYear = thisYear }
-	}
-	if (fromYear > toYear) {
-		var t = fromYear; fromYear = toYear; toYear = t
-	}
-
-
-	var hList = []
-	for (var year=fromYear; year<=toYear; year++){
-		hList=hList.concat(holidays(year))
-	}
-
-	function date2event(dobj){
-		var dtstamp = ical_datetimestr(now.format("YYYY-MM-DD"));
-		var uID = uuidv1();
-		var o={}
-		    o["year"]=dobj.y;
-		    o["month"]=dobj.m -1; //month: 0-11
-		    o["date"]=dobj.d;
-		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
-		var d2 = moment.tz(o,grTZ).add(1,'day').format("YYYY-MM-DD") 
-		var t=vcal_event;
-		return (
-		  t.replace(/summary/g, dobj.t)
-		   .replace("dtstart",ical_datestr(d1))
-		   .replace("dtend",ical_datestr(d2))
-		   .replace("dtstamp",dtstamp)
-		   .replace("uid",uID+"_"+ical_datestr(d1))
-		   .replace(/comment/g,moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
-		   .replace("description",moment.tz(o,grTZ).format("DD/MM/YYYY"))
-		)
-	}
-
-	function date2list(dobj){
-		var o={}
-		    o["year"]=dobj.y;
-		    o["month"]=dobj.m -1; //month: 0-11
-		    o["date"]=dobj.d;
-		var d1 = moment.tz(o,grTZ).format("YYYY-MM-DD") 
-		return ( d1 + '\t' + dobj.t + '\r' )
-	}
-
-
-
-  	res.send(
-		(asList == 1)
-		? hList.map(date2list).join().replace(/,/g,"\n")
-		: ''
-		  + vcal_header
-		  + hList.map(date2event).join().replace(/,/g,"\n") 
-		  + vcal_footer + '\n'
+        res.append('Content-Type',
+            'text/' +
+            (asList == 1) ? 'plain' : 'calendar' +
+            '; charset=utf-8'
         );
-  })
-  .listen(PORT  /*, () => console.log(`Listening on ${ PORT }`)*/)
+
+        var fromYear = Number(req.query.from)
+        var toYear = Number(req.query.to)
+        if (isNaN(fromYear) && isNaN(toYear)) {
+            fromYear = thisYear - 5;
+            toYear = thisYear + 5
+        } else {
+            if (isNaN(toYear)) {
+                toYear = thisYear
+            }
+            if (isNaN(fromYear)) {
+                fromYear = thisYear
+            }
+        }
+        if (fromYear > toYear) {
+            var t = fromYear;
+            fromYear = toYear;
+            toYear = t
+        }
+
+
+        var hList = []
+        for (var year = fromYear; year <= toYear; year++) {
+            hList = hList.concat(holidays(year))
+        }
+
+        function date2event(dobj) {
+            var dtstamp = ical_datetimestr(now.format("YYYY-MM-DD"));
+            var uID = uuidv1();
+            var o = {}
+            o["year"] = dobj.y;
+            o["month"] = dobj.m - 1; //month: 0-11
+            o["date"] = dobj.d;
+            var d1 = moment.tz(o, grTZ).format("YYYY-MM-DD")
+            var d2 = moment.tz(o, grTZ).add(1, 'day').format("YYYY-MM-DD")
+            var t = vcal_event;
+            return (
+                t.replace(/summary/g, dobj.t)
+                .replace("dtstart", ical_datestr(d1))
+                .replace("dtend", ical_datestr(d2))
+                .replace("dtstamp", dtstamp)
+                .replace("uid", uID + "_" + ical_datestr(d1))
+                .replace(/comment/g, moment.tz(o, grTZ).format("DD/MM/YYYY") + " " + dobj.t)
+                .replace("description", moment.tz(o, grTZ).format("DD/MM/YYYY"))
+            )
+        }
+
+        function date2list(dobj) {
+            var o = {}
+            o["year"] = dobj.y;
+            o["month"] = dobj.m - 1; //month: 0-11
+            o["date"] = dobj.d;
+            var d1 = moment.tz(o, grTZ).format("YYYY-MM-DD")
+            return (d1 + '\t' + dobj.t + '\r')
+        }
+
+
+
+        res.send(
+            (asList == 1) ?
+            hList.map(date2list).join().replace(/,/g, "\n") + '\n' :
+            '' +
+            vcal_header +
+            hList.map(date2event).join().replace(/,/g, "\n") +
+            vcal_footer + '\n'
+        );
+    })
+    .listen(PORT /*, () => console.log(`Listening on ${ PORT }`)*/ )
 
 
 
@@ -330,7 +361,7 @@ express()
 
 Samples:
 
-LOCATION;LANGUAGE=el:�����
+LOCATION;LANGUAGE=el:Ελλάς
        DTSTART;TZID=America/New_York:19980119T020000
        DTEND;TZID=America/New_York:19980119T030000
 
