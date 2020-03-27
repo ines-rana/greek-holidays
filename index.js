@@ -70,7 +70,8 @@ return retval;
 function ical_datestr(ts){
   var td = moment.tz(ts +" 12:00:00", grTZ);
   //return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z'
-  return td.tz("EET").format('YYYYMMDDTHHmmss')
+  //return td.tz("EET").format('YYYYMMDDTHHmmss')
+  return td.tz("Europe/Athens").format('YYYYMMDDTHHmmss')
 }
 
 
@@ -243,7 +244,7 @@ express()
 		return (
 		  t.replace(/summary/g, dobj.t)
 		   .replace("dtstart",ical_datestr(d1))
-		   .replace("dtend",ical_datestr(d1))
+		   .replace("dtend",ical_datestr(d2))
 		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
 		   .replace("uid",uuidv1()+"_"+ical_datestr(d1))
 		   .replace(/comment/g,moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
