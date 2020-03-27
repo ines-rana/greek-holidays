@@ -187,8 +187,8 @@ END:VTIMEZONE
 const vcal_event = (function () {/*BEGIN:VEVENT
 DESCRIPTION;LANGUAGE=el:description
 SUMMARY;LANGUAGE=el:summary
-DTSTART:dtstart
-DTEND:dtend
+DTSTART;VALUE=DATE:dtstart
+DTEND;VALUE=DATE:dtend
 COMMENT;LANGUAGE=el:comment
 UID:uid
 DTSTAMP:dtstamp
