@@ -66,10 +66,18 @@ return retval;
 
 
 
-// format date string in local timezone (1997-01-06) as 19970105T220000Z
+// format datetime string in local timezone (1997-01-06) as 19970106T000000
+function ical_datetimestr(ts){
+  var td = moment.tz(ts +" 00:00:00", grTZ);
+  return td.tz("Europe/Athens").format('YYYYMMDDTHHmmss')
+}
+
+
+
+
+// format date string in local timezone (1997-01-06) as 19970106
 function ical_datestr(ts){
   var td = moment.tz(ts +" 00:00:00", grTZ);
-  //return td.tz("Europe/Athens").format('YYYYMMDDTHHmmss')
   return td.tz("Europe/Athens").format('YYYYMMDD')	// no time component
 }
 
@@ -244,8 +252,8 @@ express()
 		  t.replace(/summary/g, dobj.t)
 		   .replace("dtstart",ical_datestr(d1))
 		   .replace("dtend",ical_datestr(d2))
-		   .replace("dtstamp",ical_datestr(now.format("YYYY-MM-DD")))
-		   .replace("uid",uuidv1()+"_"+ical_datestr(d1))
+		   .replace("dtstamp",ical_datetimestr(now.format("YYYY-MM-DD")))
+		   .replace("uid",uuidv1()+"_"+ical_datetimestr(d1))
 		   .replace(/comment/g,moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
 		   .replace("description",moment.tz(o,grTZ).format("DD/MM/YYYY"))
 		)
@@ -268,7 +276,7 @@ express()
 
 		+ now.format('') + '\n' 
 		+ now.format('MMMM DD/MM/YYYY HH:mm:ss') + '\n'
-		+ 'DTSTAMP:' + ical_datestr("1997-01-06") + '\n'
+		+ 'DTSTAMP:' + ical_datetimestr("1997-01-06") + '\n'
 		+ 'DTSTAMP:' + now.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z' + '\n'
 		+ thisYear + '\n'
 		+ fromYear + " - " + toYear + '\n'
