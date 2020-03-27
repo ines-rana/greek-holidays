@@ -66,10 +66,10 @@ return retval;
 
 
 
-// format datetime string in local timezone (1997-01-06) as 19970106T000000
+// format datetime string in local timezone (1997-01-06) as 19970105T220000Z
 function ical_datetimestr(ts){
   var td = moment.tz(ts +" 00:00:00", grTZ);
-  return td.tz("Europe/Athens").format('YYYYMMDDTHHmmss')
+  return td.tz("UTC").format('YYYYMMDDTHHmmssZ')
 }
 
 
@@ -171,7 +171,9 @@ X-PUBLISHED-TTL:PT48H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 LOCATION;LANGUAGE=el:Ελλάς
-BEGIN:VTIMEZONE
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+/*
+BEGIN:XVTIMEZONE
 TZID:Europe/Athens
 TZURL:http://tzurl.org/zoneinfo-outlook/Europe/Athens
 X-LIC-LOCATION:Europe/Athens
@@ -190,7 +192,7 @@ DTSTART:19701025T040000
 RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
 END:STANDARD
 END:VTIMEZONE
-*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+*/
 
 const vcal_event = (function () {/*BEGIN:VEVENT
 DESCRIPTION;LANGUAGE=el:description
