@@ -246,7 +246,7 @@ express()
         var now = moment().tz(grTZ);
         const thisYear = Number(now.format('YYYY'));
 
-        var fromYear = Number(req.query.asList)
+        var asList = Number(req.query.asList)
         if (isNaN(asList)) {
             asList = 0;
         }
