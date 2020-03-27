@@ -189,8 +189,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT24H
 X-PUBLISHED-TTL:PT24H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-*/
-}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
 // no need for VTIMEZONE definition
