@@ -68,7 +68,7 @@ return retval;
 
 // format date string in local timezone (1997-01-06) as 19970105T220000Z
 function ical_datestr(ts){
-  var td = moment.tz(ts +" 12:00:00", grTZ);
+  var td = moment.tz(ts +" 00:00:00", grTZ);
   //return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z'
   //return td.tz("EET").format('YYYYMMDDTHHmmss')
   return td.tz("Europe/Athens").format('YYYYMMDDTHHmmss')
