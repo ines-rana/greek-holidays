@@ -182,7 +182,7 @@ const vcal_header = (function() {/*BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
-  Version: 20200327T000000
+  Version: 20200328T000000
 X-WR-CALNAME;LANGUAGE=el:Ελληνικές αργίες
 X-WR-CALDESC;LANGUAGE=el:Επίσημες αργίες στην Ελλάδα
 REFRESH-INTERVAL;VALUE=DURATION:PT24H
