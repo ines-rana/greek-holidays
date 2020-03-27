@@ -70,7 +70,6 @@ return retval;
 function ical_datestr(ts){
   var td = moment.tz(ts +" 00:00:00", grTZ);
   //return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z'
-  //return td.tz("EET").format('YYYYMMDDTHHmmss')
   return td.tz("Europe/Athens").format('YYYYMMDDTHHmmss')
 }
 
