@@ -163,7 +163,7 @@ const vcal_header = (function () {/*BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://greek-holidays.herokuapp.com/
   Optional parameters: ?from=year1&to=year2
-  Version: 2020-03-27
+  Version: 20200327T000000
 X-WR-CALNAME;LANGUAGE=el:Ελληνικές αργίες
 X-WR-CALDESC;LANGUAGE=el:Επίσημες αργίες στην Ελλάδα
 REFRESH-INTERVAL;VALUE=DURATION:PT48H
@@ -172,8 +172,12 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 LOCATION;LANGUAGE=el:Ελλάς
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+
+
+// no need for VTIMEZONE definition
+// DTSTART/DTEND in VEVENT object below are defined just as a date (instead of datetime)
 /*
-BEGIN:XVTIMEZONE
+BEGIN:VTIMEZONE
 TZID:Europe/Athens
 TZURL:http://tzurl.org/zoneinfo-outlook/Europe/Athens
 X-LIC-LOCATION:Europe/Athens
@@ -191,7 +195,7 @@ TZNAME:EET
 DTSTART:19701025T040000
 RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
 END:STANDARD
-END:VTIMEZONE
+END:TIMEZONE
 */
 
 const vcal_event = (function () {/*BEGIN:VEVENT
