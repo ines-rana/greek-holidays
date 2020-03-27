@@ -246,6 +246,8 @@ express()
 	}
 
 	function date2event(dobj){
+		var dtstamp = ical_datetimestr(now.format("YYYY-MM-DD"));
+		var uID = uuidv1();
 		var o={}
 		    o["year"]=dobj.y;
 		    o["month"]=dobj.m -1; //month: 0-11
@@ -257,8 +259,8 @@ express()
 		  t.replace(/summary/g, dobj.t)
 		   .replace("dtstart",ical_datestr(d1))
 		   .replace("dtend",ical_datestr(d2))
-		   .replace("dtstamp",ical_datetimestr(now.format("YYYY-MM-DD")))
-		   .replace("uid",uuidv1()+"_"+ical_datetimestr(d1))
+		   .replace("dtstamp",dtstamp)
+		   .replace("uid",uID+"_"+ical_datestr(d1))
 		   .replace(/comment/g,moment.tz(o,grTZ).format("DD/MM/YYYY")+" "+dobj.t)
 		   .replace("description",moment.tz(o,grTZ).format("DD/MM/YYYY"))
 		)
