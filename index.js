@@ -166,11 +166,10 @@ PRODID:https://greek-holidays.herokuapp.com/
   Version: 20200327T000000
 X-WR-CALNAME;LANGUAGE=el:Ελληνικές αργίες
 X-WR-CALDESC;LANGUAGE=el:Επίσημες αργίες στην Ελλάδα
-REFRESH-INTERVAL;VALUE=DURATION:PT48H
-X-PUBLISHED-TTL:PT48H
+REFRESH-INTERVAL;VALUE=DURATION:PT24H
+X-PUBLISHED-TTL:PT24H
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-LOCATION;LANGUAGE=el:Ελλάς
 */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 
