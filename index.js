@@ -256,20 +256,23 @@ express()
             '; charset=utf-8'
         );
 
-        var fromYear = req.query.years.split('-',2)[0]
-        var toYear = req.query.years.split('-',2)[1]
+        var fromYear = req.query.years.split('-',2)[0];
+        var toYear = req.query.years.split('-',2)[1];
 	
-	if (fromYear == "") fromYear = NaN else fromYear=Number(fromYear);
-	if (toYear == "") toYear = NaN else toYear=Number(toYear);
-        if (isNaN(fromYear) && isNaN(toYear)) {
-            fromYear = thisYear - 5;
-            toYear = thisYear + 5
+        if (fromYear == "") fromYear = (-1); else fromYear=Number(fromYear);
+        if (toYear == "") toYear = (-1); else toYear=Number(toYear);
+        if (isNaN(fromYear)) fromYear=(-1);
+        if (isNaN(toYear)) toYear=(-1);
+        
+       if ((fromYear <= 0) && (toYear <= 0)) {
+            fromYear = thisYear - 5; 
+            toYear = thisYear + 5;
         } else {
-            if (isNaN(toYear)) {
-                toYear = thisYear
-            }
-            if (isNaN(fromYear)) {
+            if (fromYear <= 0) {
                 fromYear = thisYear
+            }
+            if (toYear <= 0) {
+                toYear = thisYear
             }
         }
         if (fromYear > toYear) {
@@ -277,7 +280,6 @@ express()
             fromYear = toYear;
             toYear = t
         }
-console.log("2: ", fromYear, " // ", toYear);
 
 
         var hList = []
