@@ -256,9 +256,11 @@ express()
             '; charset=utf-8'
         );
 
-        var fromYear = Number(req.query.years.split('-',2)[0])
-        var toYear = Number(req.query.years.split('-',2)[1])
-console.log("1: ", fromYear, " // ", toYear);
+        var fromYear = req.query.years.split('-',2)[0]
+        var toYear = req.query.years.split('-',2)[1]
+	
+	if (fromYear == "") fromYear = NaN else fromYear=Number(fromYear);
+	if (toYear == "") toYear = NaN else toYear=Number(toYear);
         if (isNaN(fromYear) && isNaN(toYear)) {
             fromYear = thisYear - 5;
             toYear = thisYear + 5
