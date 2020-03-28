@@ -245,7 +245,8 @@ express()
         var now = moment().tz(grTZ);
         const thisYear = Number(now.format('YYYY'));
 
-        var asList = Number(req.query.asList)
+        var asList = 0;
+	if (req.query && req.query.asList) asList = Number(req.query.asList);
         if (isNaN(asList)) {
             asList = 0;
         }
@@ -256,8 +257,12 @@ express()
             '; charset=utf-8'
         );
 
-        var fromYear = req.query.years.split('-',2)[0];
-        var toYear = req.query.years.split('-',2)[1];
+
+
+        var fromYear = -1;
+        var toYear = -1;
+	if (req.query && req.query.years) fromYear=req.query.years.split('-',2)[0];
+	if (req.query && req.query.years) toYear=req.query.years.split('-',2)[1];
 	
         if (fromYear == "") fromYear = (-1); else fromYear=Number(fromYear);
         if (toYear == "") toYear = (-1); else toYear=Number(toYear);
