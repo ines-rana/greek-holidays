@@ -6,7 +6,7 @@
 //	https://greek-holidays.herokuapp.com
 //	      (αργίες για το τρέχον έτος και 5 έτη μπροστά/πίσω)
 //			ή
-//	https://greek-holidays.herokuapp.com?from=2017&to=2021
+//	https://greek-holidays.herokuapp.com?years=2017-2021
 //	      (αργίες για τα καθοριζόμενα έτη)
 //	 
 //	Μπορείς να τις δεις και σε ένα (άδειο) δυναμικό ημερολόγιο
@@ -81,7 +81,7 @@ function greek_easter(y) {
 
 
 
-// format datetime string in local timezone (1997-01-06) as 19970105T220000Z
+// format datetime string in UTC timezone (1997-01-06) as 19970105T220000Z
 function ical_datetimestr(ts) {
     var td = moment.tz(ts + " 00:00:00", grTZ);
     return td.tz("UTC").format('YYYYMMDDTHHmmss') + 'Z';
@@ -90,10 +90,9 @@ function ical_datetimestr(ts) {
 
 
 
-// format date string in local timezone (1997-01-06) as 19970106
+// format date string in UTC timezone (1997-01-06) as 19970106
 function ical_datestr(ts) {
     var td = moment.tz(ts + " 00:00:00", grTZ);
-    //return td.tz("Europe/Athens").format('YYYYMMDD') // no time component
     return td.tz("UTC").format('YYYYMMDD') // no time component
 }
 
@@ -257,8 +256,9 @@ express()
             '; charset=utf-8'
         );
 
-        var fromYear = Number(req.query.from)
-        var toYear = Number(req.query.to)
+        var fromYear = Number(req.query.years.split('-',2)[0])
+        var toYear = Number(req.query.years.split('-',2)[1])
+console.log("1: ", fromYear, " // ", toYear);
         if (isNaN(fromYear) && isNaN(toYear)) {
             fromYear = thisYear - 5;
             toYear = thisYear + 5
@@ -275,6 +275,7 @@ express()
             fromYear = toYear;
             toYear = t
         }
+console.log("2: ", fromYear, " // ", toYear);
 
 
         var hList = []
